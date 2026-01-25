@@ -1,7 +1,7 @@
 # Glotter2-Core
 
 [![Makefile CI](https://github.com/rzuckerm/glotter2-core/actions/workflows/makefile.yml/badge.svg)](https://github.com/rzuckerm/glotter2-core/actions/workflows/makefile.yml)
-[![Coverage](https://rzuckerm.github.io/glotter2-core/badge.svg)](https://rzuckerm.github.io/glotter2/html_cov)
+[![Coverage](https://rzuckerm.github.io/glotter2-core/badge.svg)](https://rzuckerm.github.io/glotter2-core/html_cov)
 [![PyPI version](https://img.shields.io/pypi/v/glotter2-core)](https://pypi.org/project/glotter2-core)
 [![Python Versions](https://img.shields.io/pypi/pyversions/glotter2-core)](https://pypi.org/project/glotter2-core)
 [![Python wheel](https://img.shields.io/pypi/wheel/glotter2-core)](https://pypi.org/project/glotter2-core)
@@ -10,7 +10,7 @@
 
 *The programming language icons were downloaded from [pngegg.com](https://www.pngegg.com/)*
 
-This package is a simple, lightweight core library for[glotter2](https://github.com/rzuckerm/glotter2).
+This package is a simple, lightweight core library for [glotter2](https://github.com/rzuckerm/glotter2).
 It can be used instead of Glotter2 when all that is needed is project and test information.
 
 For getting started with Glotter2-Core, refer to our [documentation](https://rzuckerm.github.io/glotter2-core/).
