@@ -1,2 +1,3 @@
 # glotter2-core
-Core library for glotter2
+
+This package is a simple, lightweight core library for glotter2.

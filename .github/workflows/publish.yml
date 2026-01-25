@@ -1,0 +1,37 @@
+name: Publish CI
+
+on:
+  push:
+    # Publish semver tags as releases.
+    tags: [ 'v*' ]
+
+jobs:
+  publish:
+    name: Publish
+
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Read repo config
+        uses: pietrobolcato/action-read-yaml@1.1.0
+        id: repo-config
+        with:
+          config: repo-config.yml
+
+      - name: Get first python version
+        id: first-python-version
+        run: |
+          ./scripts/get-first-item.sh \
+            "first-python-version" \
+            "${{ steps.repo-config.outputs['python-versions'] }}" >>"$GITHUB_OUTPUT"
+  
+      - uses: astral-sh/setup-uv@v6
+        with:
+          version: "${{ steps.repo-config.outputs['uv-version'] }}"
+          python-version: "${{ steps.first-python-version.outputs.first-python-version }}"
+
+      - name: Publish to pypi
+        run: |
+          uv build && uv publish --token "${{secrets.PYPI_TOKEN}}"
