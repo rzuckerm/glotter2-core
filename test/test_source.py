@@ -72,60 +72,33 @@ EXPECTED_TEST_INFO_BUILD = TestInfo(
 
 def test_full_path():
     src = CoreSource(
-        name="name",
+        filename="name.py",
         language="python",
         path=os.path.join("this", "is", "a", "path"),
-        test_info_string=TEST_INFO_STRING_NO_BUILD,
+        test_info=TEST_INFO_STRING_NO_BUILD,
     )
-    expected = os.path.join("this", "is", "a", "path", "name")
+    expected = os.path.join("this", "is", "a", "path", "name.py")
     actual = src.full_path
     assert actual == expected
 
 
-def test_repr():
-    src = CoreSource(
-        "name",
-        "python",
-        os.path.join("this", "is", "a", "path"),
-        TEST_INFO_STRING_NO_BUILD,
-    )
-    actual = repr(src)
-    expected_path = os.path.join("this", "is", "a", "path")
-    expected = f"Source(name: name, path: {expected_path})"
-    assert actual == expected
-
-
 @pytest.mark.parametrize(
-    ("test_info_string", "language"),
-    [
-        pytest.param(TEST_INFO_STRING_NO_BUILD, "python", id="python"),
-        pytest.param(TEST_INFO_STRING_BUILD, "go", id="go"),
-    ],
-)
-def test_language(test_info_string, language):
-    src = CoreSource(
-        name="some-name", language=language, path="some-path", test_info_string=test_info_string
-    )
-    assert src.language == language
-
-
-@pytest.mark.parametrize(
-    ("name", "expected_name", "expected_extension"),
+    ("filename", "expected_name", "expected_extension"),
     [("name", "name", ""), ("name.ext", "name", ".ext"), ("name.ext1.ext2", "name", ".ext1.ext2")],
 )
-def test_name(name, expected_name, expected_extension):
+def test_basename_and_extension(filename, expected_name, expected_extension):
     src = CoreSource(
-        name,
-        "python",
-        os.path.join("this", "is", "a", "path"),
-        TEST_INFO_STRING_NO_BUILD,
+        filename=filename,
+        language="python",
+        path=os.path.join("this", "is", "a", "path"),
+        test_info=TEST_INFO_STRING_NO_BUILD,
     )
     assert src.name == expected_name
     assert src.extension == expected_extension
 
 
 @pytest.mark.parametrize(
-    ("name", "language", "test_info_string", "expected_test_info"),
+    ("filename", "language", "test_info_string", "expected_test_info"),
     [
         pytest.param(
             "hello_world.py",
@@ -139,8 +112,10 @@ def test_name(name, expected_name, expected_extension):
         ),
     ],
 )
-def test_test_info_matches_test_info_string(name, language, test_info_string, expected_test_info):
+def test_test_info_matches_test_info_string(
+    filename, language, test_info_string, expected_test_info
+):
     src = CoreSource(
-        name=name, language=language, path="some-path", test_info_string=test_info_string
+        filename=filename, language=language, path="some-path", test_info=test_info_string
     )
     assert src.test_info == expected_test_info
