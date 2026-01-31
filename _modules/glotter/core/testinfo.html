@@ -1,0 +1,260 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>glotter.core.testinfo &mdash; Glotter 2-Core  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
+
+  
+    <link rel="shortcut icon" href="../../../_static/favicon.gif"/>
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            Glotter 2-Core
+              <img src="../../../_static/glotter2_small.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../api.html">API</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Glotter 2-Core</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">glotter.core.testinfo</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for glotter.core.testinfo</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Container, folder, and test information&quot;&quot;&quot;</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">dataclasses</span><span class="w"> </span><span class="kn">import</span> <span class="n">dataclass</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Optional</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">yaml</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">jinja2</span><span class="w"> </span><span class="kn">import</span> <span class="n">BaseLoader</span><span class="p">,</span> <span class="n">Environment</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">glotter.core.project</span><span class="w"> </span><span class="kn">import</span> <span class="n">CoreProject</span><span class="p">,</span> <span class="n">NamingScheme</span>
+
+
+<div class="viewcode-block" id="ContainerInfo">
+<a class="viewcode-back" href="../../../api.html#glotter.core.testinfo.ContainerInfo">[docs]</a>
+<span class="nd">@dataclass</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">ContainerInfo</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Configuration for a container to run for a directory</span>
+
+<span class="sd">    :ivar image: the image to run</span>
+<span class="sd">    :ivar tag: the tag of the image to run</span>
+<span class="sd">    :ivar cmd: the command to run the source inside the container</span>
+<span class="sd">    :ivar build: an optional command to run to build the source before running the command</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">image</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">tag</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">cmd</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">build</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+
+<div class="viewcode-block" id="ContainerInfo.from_dict">
+<a class="viewcode-back" href="../../../api.html#glotter.core.testinfo.ContainerInfo.from_dict">[docs]</a>
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">from_dict</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">dictionary</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="s2">&quot;ContainerInfo&quot;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Create a ContainerInfo from a dictionary</span>
+
+<span class="sd">        :param dictionary: the dictionary representing ContainerInfo</span>
+<span class="sd">        :return: a new ContainerInfo</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">image</span> <span class="o">=</span> <span class="n">dictionary</span><span class="p">[</span><span class="s2">&quot;image&quot;</span><span class="p">]</span>
+        <span class="n">tag</span> <span class="o">=</span> <span class="n">dictionary</span><span class="p">[</span><span class="s2">&quot;tag&quot;</span><span class="p">]</span>
+        <span class="n">cmd</span> <span class="o">=</span> <span class="n">dictionary</span><span class="p">[</span><span class="s2">&quot;cmd&quot;</span><span class="p">]</span>
+        <span class="n">build</span> <span class="o">=</span> <span class="n">dictionary</span><span class="p">[</span><span class="s2">&quot;build&quot;</span><span class="p">]</span> <span class="k">if</span> <span class="s2">&quot;build&quot;</span> <span class="ow">in</span> <span class="n">dictionary</span> <span class="k">else</span> <span class="kc">None</span>
+        <span class="k">return</span> <span class="n">ContainerInfo</span><span class="p">(</span><span class="n">image</span><span class="o">=</span><span class="n">image</span><span class="p">,</span> <span class="n">tag</span><span class="o">=</span><span class="n">tag</span><span class="p">,</span> <span class="n">cmd</span><span class="o">=</span><span class="n">cmd</span><span class="p">,</span> <span class="n">build</span><span class="o">=</span><span class="n">build</span><span class="p">)</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="FolderInfo">
+<a class="viewcode-back" href="../../../api.html#glotter.core.testinfo.FolderInfo">[docs]</a>
+<span class="nd">@dataclass</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">FolderInfo</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Metadata about sources in a directory</span>
+
+<span class="sd">    :param extension: the file extension that is considered as source</span>
+<span class="sd">    :param naming: the naming scheme for files in the directory</span>
+
+<span class="sd">    :ivar extension: the file extension that is considered as source</span>
+<span class="sd">    :ivar naming: the naming scheme for files in the directory</span>
+<span class="sd">    :raises: :exc:`KeyError` if invalid naming scheme</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">extension</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">naming</span><span class="p">:</span> <span class="n">NamingScheme</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">__post_init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="nb">object</span><span class="o">.</span><span class="fm">__setattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;naming&quot;</span><span class="p">,</span> <span class="n">NamingScheme</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">naming</span><span class="p">])</span>
+        <span class="k">except</span> <span class="ne">KeyError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Unknown naming scheme: &quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">naming</span><span class="si">}</span><span class="s1">&quot;&#39;</span><span class="p">)</span> <span class="kn">from</span><span class="w"> </span><span class="nn">e</span>
+
+<div class="viewcode-block" id="FolderInfo.get_project_mappings">
+<a class="viewcode-back" href="../../../api.html#glotter.core.testinfo.FolderInfo.get_project_mappings">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_project_mappings</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">projects</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">CoreProject</span><span class="p">],</span> <span class="n">include_extension</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Uses the naming scheme to generate the expected source names in the directory</span>
+<span class="sd">        and create a mapping from project type to source name</span>
+
+<span class="sd">        :param project: dictionary whose key is a project type and whose value is</span>
+<span class="sd">            information about the project</span>
+<span class="sd">        :param include_extension: whether to include the extension in the source name</span>
+<span class="sd">        :return: a dict where the key is a ] and the value is the source name</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">extension</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">extension</span> <span class="k">if</span> <span class="n">include_extension</span> <span class="k">else</span> <span class="s2">&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="n">project_type</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">project</span><span class="o">.</span><span class="n">get_project_name_by_scheme</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">naming</span><span class="p">)</span><span class="si">}{</span><span class="n">extension</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="k">for</span> <span class="n">project_type</span><span class="p">,</span> <span class="n">project</span> <span class="ow">in</span> <span class="n">projects</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+        <span class="p">}</span></div>
+
+
+<div class="viewcode-block" id="FolderInfo.from_dict">
+<a class="viewcode-back" href="../../../api.html#glotter.core.testinfo.FolderInfo.from_dict">[docs]</a>
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">from_dict</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">dictionary</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="s2">&quot;FolderInfo&quot;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Create a FileInfo from a dictionary</span>
+
+<span class="sd">        :param dictionary: the dictionary representing FileInfo</span>
+<span class="sd">        :return: a new FileInfo</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">FolderInfo</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="s2">&quot;extension&quot;</span><span class="p">],</span> <span class="n">dictionary</span><span class="p">[</span><span class="s2">&quot;naming&quot;</span><span class="p">])</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="TestInfo">
+<a class="viewcode-back" href="../../../api.html#glotter.core.testinfo.TestInfo">[docs]</a>
+<span class="nd">@dataclass</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">TestInfo</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;An object representation of a testinfo file</span>
+
+<span class="sd">    :param container_info: ContainerInfo object</span>
+<span class="sd">    :param file_info: FolderInfo object</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">container_info</span><span class="p">:</span> <span class="n">ContainerInfo</span>
+    <span class="n">file_info</span><span class="p">:</span> <span class="n">FolderInfo</span>
+
+    <span class="n">__test__</span> <span class="o">=</span> <span class="kc">False</span>  <span class="c1"># Indicate this is not a test</span>
+
+<div class="viewcode-block" id="TestInfo.from_dict">
+<a class="viewcode-back" href="../../../api.html#glotter.core.testinfo.TestInfo.from_dict">[docs]</a>
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">from_dict</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">dictionary</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="s2">&quot;TestInfo&quot;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Create a TestInfo from a dictionary</span>
+
+<span class="sd">        :param dictionary: the dictionary representing TestInfo</span>
+<span class="sd">        :return: a new TestInfo</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">TestInfo</span><span class="p">(</span>
+            <span class="n">container_info</span><span class="o">=</span><span class="n">ContainerInfo</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="s2">&quot;container&quot;</span><span class="p">]),</span>
+            <span class="n">file_info</span><span class="o">=</span><span class="n">FolderInfo</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="s2">&quot;folder&quot;</span><span class="p">]),</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="TestInfo.from_string">
+<a class="viewcode-back" href="../../../api.html#glotter.core.testinfo.TestInfo.from_string">[docs]</a>
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">from_string</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">string</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">source</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;TestInfo&quot;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Create a TestInfo from a string. Modify the string using Jinja2 templating.</span>
+<span class="sd">        Then parse it as yaml</span>
+
+<span class="sd">        :param string: contents of a testinfo file</span>
+<span class="sd">        :param source: a source object to use for jinja2 template parsing</span>
+<span class="sd">        :return: a new TestInfo</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">template</span> <span class="o">=</span> <span class="n">Environment</span><span class="p">(</span><span class="n">loader</span><span class="o">=</span><span class="n">BaseLoader</span><span class="p">)</span><span class="o">.</span><span class="n">from_string</span><span class="p">(</span><span class="n">string</span><span class="p">)</span>
+        <span class="n">template_string</span> <span class="o">=</span> <span class="n">template</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="n">source</span><span class="o">=</span><span class="n">source</span><span class="p">)</span>
+        <span class="n">info_yaml</span> <span class="o">=</span> <span class="n">yaml</span><span class="o">.</span><span class="n">safe_load</span><span class="p">(</span><span class="n">template_string</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">cls</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">info_yaml</span><span class="p">)</span></div>
+</div>
+
+
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;ContainerInfo&quot;</span><span class="p">,</span> <span class="s2">&quot;FolderInfo&quot;</span><span class="p">,</span> <span class="s2">&quot;TestInfo&quot;</span><span class="p">]</span>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p></p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

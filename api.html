@@ -45,7 +45,6 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">API</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#module-glotter.core">glotter.core</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#module-glotter.core.project">glotter.core.project</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#glotter.core.project.AcronymScheme"><code class="docutils literal notranslate"><span class="pre">AcronymScheme</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#glotter.core.project.CoreProject"><code class="docutils literal notranslate"><span class="pre">CoreProject</span></code></a><ul>
@@ -54,6 +53,35 @@
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#glotter.core.project.NamingScheme"><code class="docutils literal notranslate"><span class="pre">NamingScheme</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-glotter.core.testinfo">glotter.core.testinfo</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#glotter.core.testinfo.ContainerInfo"><code class="docutils literal notranslate"><span class="pre">ContainerInfo</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#glotter.core.testinfo.ContainerInfo.from_dict"><code class="docutils literal notranslate"><span class="pre">ContainerInfo.from_dict()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#glotter.core.testinfo.FolderInfo"><code class="docutils literal notranslate"><span class="pre">FolderInfo</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#glotter.core.testinfo.FolderInfo.from_dict"><code class="docutils literal notranslate"><span class="pre">FolderInfo.from_dict()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#glotter.core.testinfo.FolderInfo.get_project_mappings"><code class="docutils literal notranslate"><span class="pre">FolderInfo.get_project_mappings()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#glotter.core.testinfo.TestInfo"><code class="docutils literal notranslate"><span class="pre">TestInfo</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#glotter.core.testinfo.TestInfo.from_dict"><code class="docutils literal notranslate"><span class="pre">TestInfo.from_dict()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#glotter.core.testinfo.TestInfo.from_string"><code class="docutils literal notranslate"><span class="pre">TestInfo.from_string()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-glotter.core.source">glotter.core.source</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#glotter.core.source.CoreSource"><code class="docutils literal notranslate"><span class="pre">CoreSource</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#glotter.core.source.CoreSource.extension"><code class="docutils literal notranslate"><span class="pre">CoreSource.extension</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#glotter.core.source.CoreSource.full_path"><code class="docutils literal notranslate"><span class="pre">CoreSource.full_path</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#glotter.core.source.CoreSource.language"><code class="docutils literal notranslate"><span class="pre">CoreSource.language</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#glotter.core.source.CoreSource.name"><code class="docutils literal notranslate"><span class="pre">CoreSource.name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#glotter.core.source.CoreSource.path"><code class="docutils literal notranslate"><span class="pre">CoreSource.path</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#glotter.core.source.CoreSource.test_info"><code class="docutils literal notranslate"><span class="pre">CoreSource.test_info</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -86,14 +114,6 @@
              
   <section id="api">
 <h1>API<a class="headerlink" href="#api" title="Link to this heading"></a></h1>
-<section id="module-glotter.core">
-<span id="glotter-core"></span><h2>glotter.core<a class="headerlink" href="#module-glotter.core" title="Link to this heading"></a></h2>
-<p>Core utilities and types for Glotter2.</p>
-<p>This package is a simple, lightweight core library for
-<a class="reference external" href="https://github.com/rzuckerm/glotter2">glotter2</a>.
-It can be used instead of Glotter2 when all that is needed is project and test
-information.</p>
-</section>
 <section id="module-glotter.core.project">
 <span id="glotter-core-project"></span><h2>glotter.core.project<a class="headerlink" href="#module-glotter.core.project" title="Link to this heading"></a></h2>
 <p>Project information, acronym schemes, and naming schemes.</p>
@@ -181,6 +201,206 @@ and all words are joined together (e.g., <code class="docutils literal notransla
 </ul>
 </dd>
 </dl>
+</dd></dl>
+
+</section>
+<section id="module-glotter.core.testinfo">
+<span id="glotter-core-testinfo"></span><h2>glotter.core.testinfo<a class="headerlink" href="#module-glotter.core.testinfo" title="Link to this heading"></a></h2>
+<p>Container, folder, and test information</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="glotter.core.testinfo.ContainerInfo">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">glotter.core.testinfo.</span></span><span class="sig-name descname"><span class="pre">ContainerInfo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tag</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cmd</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">build</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/glotter/core/testinfo.html#ContainerInfo"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#glotter.core.testinfo.ContainerInfo" title="Link to this definition"></a></dt>
+<dd><p>Configuration for a container to run for a directory</p>
+<dl class="field-list simple">
+<dt class="field-odd">Variables<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>image</strong> – the image to run</p></li>
+<li><p><strong>tag</strong> – the tag of the image to run</p></li>
+<li><p><strong>cmd</strong> – the command to run the source inside the container</p></li>
+<li><p><strong>build</strong> – an optional command to run to build the source before running the command</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="glotter.core.testinfo.ContainerInfo.from_dict">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dictionary</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#glotter.core.testinfo.ContainerInfo" title="glotter.core.testinfo.ContainerInfo"><span class="pre">ContainerInfo</span></a></span></span><a class="reference internal" href="_modules/glotter/core/testinfo.html#ContainerInfo.from_dict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#glotter.core.testinfo.ContainerInfo.from_dict" title="Link to this definition"></a></dt>
+<dd><p>Create a ContainerInfo from a dictionary</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>dictionary</strong> – the dictionary representing ContainerInfo</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>a new ContainerInfo</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="glotter.core.testinfo.FolderInfo">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">glotter.core.testinfo.</span></span><span class="sig-name descname"><span class="pre">FolderInfo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">extension</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">naming</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#glotter.core.project.NamingScheme" title="glotter.core.project.NamingScheme"><span class="pre">NamingScheme</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/glotter/core/testinfo.html#FolderInfo"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#glotter.core.testinfo.FolderInfo" title="Link to this definition"></a></dt>
+<dd><p>Metadata about sources in a directory</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>extension</strong> – the file extension that is considered as source</p></li>
+<li><p><strong>naming</strong> – the naming scheme for files in the directory</p></li>
+</ul>
+</dd>
+<dt class="field-even">Variables<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>extension</strong> – the file extension that is considered as source</p></li>
+<li><p><strong>naming</strong> – the naming scheme for files in the directory</p></li>
+</ul>
+</dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="xref py py-exc docutils literal notranslate"><span class="pre">KeyError</span></code> if invalid naming scheme</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="glotter.core.testinfo.FolderInfo.from_dict">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dictionary</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#glotter.core.testinfo.FolderInfo" title="glotter.core.testinfo.FolderInfo"><span class="pre">FolderInfo</span></a></span></span><a class="reference internal" href="_modules/glotter/core/testinfo.html#FolderInfo.from_dict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#glotter.core.testinfo.FolderInfo.from_dict" title="Link to this definition"></a></dt>
+<dd><p>Create a FileInfo from a dictionary</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>dictionary</strong> – the dictionary representing FileInfo</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>a new FileInfo</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="glotter.core.testinfo.FolderInfo.get_project_mappings">
+<span class="sig-name descname"><span class="pre">get_project_mappings</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">projects</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#glotter.core.project.CoreProject" title="glotter.core.project.CoreProject"><span class="pre">CoreProject</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">include_extension</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/glotter/core/testinfo.html#FolderInfo.get_project_mappings"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#glotter.core.testinfo.FolderInfo.get_project_mappings" title="Link to this definition"></a></dt>
+<dd><p>Uses the naming scheme to generate the expected source names in the directory
+and create a mapping from project type to source name</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>project</strong> – dictionary whose key is a project type and whose value is
+information about the project</p></li>
+<li><p><strong>include_extension</strong> – whether to include the extension in the source name</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>a dict where the key is a ] and the value is the source name</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="glotter.core.testinfo.TestInfo">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">glotter.core.testinfo.</span></span><span class="sig-name descname"><span class="pre">TestInfo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">container_info</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#glotter.core.testinfo.ContainerInfo" title="glotter.core.testinfo.ContainerInfo"><span class="pre">ContainerInfo</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">file_info</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#glotter.core.testinfo.FolderInfo" title="glotter.core.testinfo.FolderInfo"><span class="pre">FolderInfo</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/glotter/core/testinfo.html#TestInfo"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#glotter.core.testinfo.TestInfo" title="Link to this definition"></a></dt>
+<dd><p>An object representation of a testinfo file</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>container_info</strong> – ContainerInfo object</p></li>
+<li><p><strong>file_info</strong> – FolderInfo object</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="glotter.core.testinfo.TestInfo.from_dict">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dictionary</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#glotter.core.testinfo.TestInfo" title="glotter.core.testinfo.TestInfo"><span class="pre">TestInfo</span></a></span></span><a class="reference internal" href="_modules/glotter/core/testinfo.html#TestInfo.from_dict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#glotter.core.testinfo.TestInfo.from_dict" title="Link to this definition"></a></dt>
+<dd><p>Create a TestInfo from a dictionary</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>dictionary</strong> – the dictionary representing TestInfo</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>a new TestInfo</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="glotter.core.testinfo.TestInfo.from_string">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_string</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">string</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">source</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#glotter.core.testinfo.TestInfo" title="glotter.core.testinfo.TestInfo"><span class="pre">TestInfo</span></a></span></span><a class="reference internal" href="_modules/glotter/core/testinfo.html#TestInfo.from_string"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#glotter.core.testinfo.TestInfo.from_string" title="Link to this definition"></a></dt>
+<dd><p>Create a TestInfo from a string. Modify the string using Jinja2 templating.
+Then parse it as yaml</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>string</strong> – contents of a testinfo file</p></li>
+<li><p><strong>source</strong> – a source object to use for jinja2 template parsing</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>a new TestInfo</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-glotter.core.source">
+<span id="glotter-core-source"></span><h2>glotter.core.source<a class="headerlink" href="#module-glotter.core.source" title="Link to this heading"></a></h2>
+<p>Source information</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="glotter.core.source.CoreSource">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">glotter.core.source.</span></span><span class="sig-name descname"><span class="pre">CoreSource</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">language</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_info_string</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/glotter/core/source.html#CoreSource"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#glotter.core.source.CoreSource" title="Link to this definition"></a></dt>
+<dd><p>Metadata about a source file</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> – filename including extension</p></li>
+<li><p><strong>language</strong> – the language of the source</p></li>
+<li><p><strong>path</strong> – path to the file excluding name</p></li>
+<li><p><strong>test_info_string</strong> – a string in yaml format containing testinfo for a directory</p></li>
+</ul>
+</dd>
+<dt class="field-even">Variables<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>name</strong> – filename including extension</p></li>
+<li><p><strong>path</strong> – path to the file excluding name</p></li>
+<li><p><strong>language</strong> – the language of the source</p></li>
+<li><p><strong>test_info</strong> – TestInfo object</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py property">
+<dt class="sig sig-object py" id="glotter.core.source.CoreSource.extension">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">extension</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#glotter.core.source.CoreSource.extension" title="Link to this definition"></a></dt>
+<dd><p>Returns the extension of the source</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="glotter.core.source.CoreSource.full_path">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">full_path</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#glotter.core.source.CoreSource.full_path" title="Link to this definition"></a></dt>
+<dd><p>Returns the full path to the source including filename and extension</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="glotter.core.source.CoreSource.language">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">language</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#glotter.core.source.CoreSource.language" title="Link to this definition"></a></dt>
+<dd><p>Returns the language of the source</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="glotter.core.source.CoreSource.name">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">name</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#glotter.core.source.CoreSource.name" title="Link to this definition"></a></dt>
+<dd><p>Returns the name of the source excluding the extension</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="glotter.core.source.CoreSource.path">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">path</span></span><a class="headerlink" href="#glotter.core.source.CoreSource.path" title="Link to this definition"></a></dt>
+<dd><p>Returns the path to the source excluding name</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="glotter.core.source.CoreSource.test_info">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">test_info</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#glotter.core.testinfo.TestInfo" title="glotter.core.testinfo.TestInfo"><span class="pre">TestInfo</span></a></em><a class="headerlink" href="#glotter.core.source.CoreSource.test_info" title="Link to this definition"></a></dt>
+<dd><p>Returns parsed TestInfo object</p>
+</dd></dl>
+
 </dd></dl>
 
 </section>
