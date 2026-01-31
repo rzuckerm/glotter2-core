@@ -76,10 +76,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#glotter.core.source.CoreSource"><code class="docutils literal notranslate"><span class="pre">CoreSource</span></code></a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#glotter.core.source.CoreSource.extension"><code class="docutils literal notranslate"><span class="pre">CoreSource.extension</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#glotter.core.source.CoreSource.full_path"><code class="docutils literal notranslate"><span class="pre">CoreSource.full_path</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#glotter.core.source.CoreSource.language"><code class="docutils literal notranslate"><span class="pre">CoreSource.language</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#glotter.core.source.CoreSource.name"><code class="docutils literal notranslate"><span class="pre">CoreSource.name</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#glotter.core.source.CoreSource.path"><code class="docutils literal notranslate"><span class="pre">CoreSource.path</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#glotter.core.source.CoreSource.test_info"><code class="docutils literal notranslate"><span class="pre">CoreSource.test_info</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -345,22 +342,14 @@ Then parse it as yaml</p>
 <p>Source information</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="glotter.core.source.CoreSource">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">glotter.core.source.</span></span><span class="sig-name descname"><span class="pre">CoreSource</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">language</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_info_string</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/glotter/core/source.html#CoreSource"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#glotter.core.source.CoreSource" title="Link to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">glotter.core.source.</span></span><span class="sig-name descname"><span class="pre">CoreSource</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">language</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_info</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#glotter.core.testinfo.TestInfo" title="glotter.core.testinfo.TestInfo"><span class="pre">TestInfo</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/glotter/core/source.html#CoreSource"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#glotter.core.source.CoreSource" title="Link to this definition"></a></dt>
 <dd><p>Metadata about a source file</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dt class="field-odd">Variables<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>name</strong> – filename including extension</p></li>
+<li><p><strong>fullname</strong> – filename including extension</p></li>
 <li><p><strong>language</strong> – the language of the source</p></li>
 <li><p><strong>path</strong> – path to the file excluding name</p></li>
-<li><p><strong>test_info_string</strong> – a string in yaml format containing testinfo for a directory</p></li>
-</ul>
-</dd>
-<dt class="field-even">Variables<span class="colon">:</span></dt>
-<dd class="field-even"><ul class="simple">
-<li><p><strong>name</strong> – filename including extension</p></li>
-<li><p><strong>path</strong> – path to the file excluding name</p></li>
-<li><p><strong>language</strong> – the language of the source</p></li>
 <li><p><strong>test_info</strong> – TestInfo object</p></li>
 </ul>
 </dd>
@@ -378,27 +367,9 @@ Then parse it as yaml</p>
 </dd></dl>
 
 <dl class="py property">
-<dt class="sig sig-object py" id="glotter.core.source.CoreSource.language">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">language</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#glotter.core.source.CoreSource.language" title="Link to this definition"></a></dt>
-<dd><p>Returns the language of the source</p>
-</dd></dl>
-
-<dl class="py property">
 <dt class="sig sig-object py" id="glotter.core.source.CoreSource.name">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">name</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#glotter.core.source.CoreSource.name" title="Link to this definition"></a></dt>
 <dd><p>Returns the name of the source excluding the extension</p>
-</dd></dl>
-
-<dl class="py property">
-<dt class="sig sig-object py" id="glotter.core.source.CoreSource.path">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">path</span></span><a class="headerlink" href="#glotter.core.source.CoreSource.path" title="Link to this definition"></a></dt>
-<dd><p>Returns the path to the source excluding name</p>
-</dd></dl>
-
-<dl class="py property">
-<dt class="sig sig-object py" id="glotter.core.source.CoreSource.test_info">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">test_info</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#glotter.core.testinfo.TestInfo" title="glotter.core.testinfo.TestInfo"><span class="pre">TestInfo</span></a></em><a class="headerlink" href="#glotter.core.source.CoreSource.test_info" title="Link to this definition"></a></dt>
-<dd><p>Returns parsed TestInfo object</p>
 </dd></dl>
 
 </dd></dl>
