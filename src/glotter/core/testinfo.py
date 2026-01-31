@@ -1,6 +1,7 @@
 """Container, folder, and test information"""
 
 from dataclasses import dataclass
+from typing import Optional
 
 import yaml
 from jinja2 import BaseLoader, Environment
@@ -21,7 +22,7 @@ class ContainerInfo:
     image: str
     tag: str
     cmd: str
-    build: str | None = None
+    build: Optional[str] = None
 
     @classmethod
     def from_dict(cls, dictionary: dict[str, str]) -> "ContainerInfo":
