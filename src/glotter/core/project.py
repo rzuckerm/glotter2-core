@@ -44,7 +44,7 @@ class AcronymScheme(Enum):
     two_letter_limit = "two_letter_limit"
 
 
-@dataclass
+@dataclass(frozen=True)
 class CoreProject:
     """
     Project information
@@ -60,7 +60,7 @@ class CoreProject:
     acronym_scheme: AcronymScheme = AcronymScheme.two_letter_limit
 
     def __post_init__(self):
-        self.acronyms = [acronym.upper() for acronym in self.acronyms]
+        object.__setattr__(self, "acronyms", [acronym.upper() for acronym in self.acronyms])
 
     def get_project_name_by_scheme(self, naming: NamingScheme) -> str:
         """
