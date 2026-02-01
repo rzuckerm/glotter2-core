@@ -44,15 +44,15 @@ class FolderInfo:
     """Metadata about sources in a directory
 
     :param extension: the file extension that is considered as source
-    :param naming: the naming scheme for files in the directory
+    :param naming: string containing the naming scheme for files in the directory
 
     :ivar extension: the file extension that is considered as source
-    :ivar naming: the naming scheme for files in the directory
+    :ivar NamingScheme naming: the naming scheme for files in the directory
     :raises: :exc:`KeyError` if invalid naming scheme
     """
 
     extension: str
-    naming: NamingScheme
+    naming: str
 
     def __post_init__(self) -> None:
         try:

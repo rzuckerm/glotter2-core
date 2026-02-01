@@ -10,16 +10,21 @@ from glotter.core.testinfo import TestInfo
 class CoreSource:
     """Metadata about a source file
 
-    :ivar fullname: filename including extension
+    :param filename: filename including extension
+    :param language: the language of the source
+    :param path: path to the file excluding name
+    :param test_info: a string in yaml format containing testinfo for a directory
+
+    :ivar filename: filename including extension
     :ivar language: the language of the source
     :ivar path: path to the file excluding name
-    :ivar test_info: TestInfo object
+    :ivar TestInfo test_info: TestInfo object
     """
 
     filename: str
     language: str
     path: str
-    test_info: TestInfo = field(repr=False)
+    test_info: str = field(repr=False)
 
     def __post_init__(self) -> None:
         object.__setattr__(self, "test_info", TestInfo.from_string(self.test_info, self))
