@@ -32,7 +32,7 @@ def test_folder_info_from_dict():
 
 def test_folder_info_bad_naming_scheme():
     dct = {"extension": ".py", "naming": "bad"}
-    with pytest.raises(KeyError) as exc:
+    with pytest.raises(ValueError) as exc:
         FolderInfo.from_dict(dct)
 
     assert "Unknown naming scheme" in exc.value.args[0]

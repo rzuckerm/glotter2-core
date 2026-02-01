@@ -6,7 +6,8 @@ from typing import Optional
 import yaml
 from jinja2 import BaseLoader, Environment
 
-from glotter.core.project import CoreProject, NamingScheme
+from .base import BaseProject
+from .constants import NamingScheme
 
 
 @dataclass(frozen=True)
@@ -45,10 +46,10 @@ class FolderInfo:
 
     :param extension: the file extension that is considered as source
     :param naming: string containing the naming scheme for files in the directory
+    :raises: :exc:`ValueError` if invalid naming scheme
 
     :ivar extension: the file extension that is considered as source
     :ivar NamingScheme naming: the naming scheme for files in the directory
-    :raises: :exc:`KeyError` if invalid naming scheme
     """
 
     extension: str
@@ -58,10 +59,10 @@ class FolderInfo:
         try:
             object.__setattr__(self, "naming", NamingScheme[self.naming])
         except KeyError as e:
-            raise KeyError(f'Unknown naming scheme: "{self.naming}"') from e
+            raise ValueError(f'Unknown naming scheme: "{self.naming}"') from e
 
     def get_project_mappings(
-        self, projects: dict[str, CoreProject], include_extension: bool = False
+        self, projects: dict[str, BaseProject], include_extension: bool = False
     ) -> dict[str, str]:
         """
         Uses the naming scheme to generate the expected source names in the directory

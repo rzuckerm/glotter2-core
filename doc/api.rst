@@ -1,6 +1,18 @@
 API
 ===
 
+glotter.core.base
+-----------------
+
+.. automodule:: glotter.core.base
+   :members:
+
+glotter.core.constants
+----------------------
+
+.. automodule:: glotter.core.constants
+   :members:
+
 glotter.core.project
 --------------------
 

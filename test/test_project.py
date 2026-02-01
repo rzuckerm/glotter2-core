@@ -1,6 +1,7 @@
 import pytest
 
-from glotter.core.project import AcronymScheme, CoreProject, NamingScheme
+from glotter.core.constants import AcronymScheme, NamingScheme
+from glotter.core.project import CoreProject
 
 project_scheme_permutation_map = [
     {
@@ -183,6 +184,20 @@ def get_test_id(perm):
 
 
 @pytest.mark.parametrize(
+    ("acronym_scheme", "expected_acronym_scheme"),
+    [pytest.param(member.value, member, id=member.value) for member in AcronymScheme],
+)
+def test_acronym_scheme(acronym_scheme, expected_acronym_scheme):
+    project = CoreProject(words=["whatever"], acronym_scheme=acronym_scheme)
+    assert project.acronym_scheme == expected_acronym_scheme
+
+
+def test_acronym_scheme_bad():
+    with pytest.raises(ValueError):
+        CoreProject(words=["whatever"], acronym_scheme="bad")
+
+
+@pytest.mark.parametrize(
     ("words", "acronyms", "naming_scheme", "acronym_scheme", "expected"),
     [perm[1:] for perm in get_project_scheme_permutations()],
     ids=[get_test_id(perm) for perm in get_project_scheme_permutations()],
@@ -200,9 +215,24 @@ def test_get_project_name_by_scheme(words, acronyms, naming_scheme, acronym_sche
     assert actual == expected
 
 
+@pytest.mark.parametrize(
+    ("naming_scheme", "expected"),
+    [
+        pytest.param("hyphen", "hello-world", id="hyphen"),
+        pytest.param("underscore", "hello_world", id="underscore"),
+        pytest.param("camel", "HelloWorld", id="camel"),
+        pytest.param("pascal", "helloWorld", id="pascal"),
+        pytest.param("lower", "helloworld", id="lower"),
+    ],
+)
+def test_get_project_name_by_scheme_str(naming_scheme, expected):
+    project = CoreProject(words=["hello", "world"])
+    assert project.get_project_name_by_scheme(naming_scheme) == expected
+
+
 def test_get_project_name_by_scheme_bad():
     project = CoreProject(words=["blah"])
-    with pytest.raises(KeyError):
+    with pytest.raises(ValueError):
         project.get_project_name_by_scheme("junk")
 
 
