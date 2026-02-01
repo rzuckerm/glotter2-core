@@ -78,7 +78,7 @@
 <span class="kn">import</span><span class="w"> </span><span class="nn">yaml</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">jinja2</span><span class="w"> </span><span class="kn">import</span> <span class="n">BaseLoader</span><span class="p">,</span> <span class="n">Environment</span>
 
-<span class="kn">from</span><span class="w"> </span><span class="nn">glotter.core.project</span><span class="w"> </span><span class="kn">import</span> <span class="n">CoreProject</span><span class="p">,</span> <span class="n">NamingScheme</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.project</span><span class="w"> </span><span class="kn">import</span> <span class="n">CoreProjectMixin</span><span class="p">,</span> <span class="n">NamingScheme</span>
 
 
 <div class="viewcode-block" id="ContainerInfo">
@@ -125,10 +125,10 @@
 
 <span class="sd">    :param extension: the file extension that is considered as source</span>
 <span class="sd">    :param naming: string containing the naming scheme for files in the directory</span>
+<span class="sd">    :raises: :exc:`ValueError` if invalid naming scheme</span>
 
 <span class="sd">    :ivar extension: the file extension that is considered as source</span>
 <span class="sd">    :ivar NamingScheme naming: the naming scheme for files in the directory</span>
-<span class="sd">    :raises: :exc:`KeyError` if invalid naming scheme</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">extension</span><span class="p">:</span> <span class="nb">str</span>
@@ -138,12 +138,12 @@
         <span class="k">try</span><span class="p">:</span>
             <span class="nb">object</span><span class="o">.</span><span class="fm">__setattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;naming&quot;</span><span class="p">,</span> <span class="n">NamingScheme</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">naming</span><span class="p">])</span>
         <span class="k">except</span> <span class="ne">KeyError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Unknown naming scheme: &quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">naming</span><span class="si">}</span><span class="s1">&quot;&#39;</span><span class="p">)</span> <span class="kn">from</span><span class="w"> </span><span class="nn">e</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Unknown naming scheme: &quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">naming</span><span class="si">}</span><span class="s1">&quot;&#39;</span><span class="p">)</span> <span class="kn">from</span><span class="w"> </span><span class="nn">e</span>
 
 <div class="viewcode-block" id="FolderInfo.get_project_mappings">
 <a class="viewcode-back" href="../../../api.html#glotter.core.testinfo.FolderInfo.get_project_mappings">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">get_project_mappings</span><span class="p">(</span>
-        <span class="bp">self</span><span class="p">,</span> <span class="n">projects</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">CoreProject</span><span class="p">],</span> <span class="n">include_extension</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">projects</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">CoreProjectMixin</span><span class="p">],</span> <span class="n">include_extension</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Uses the naming scheme to generate the expected source names in the directory</span>

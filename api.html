@@ -45,14 +45,17 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">API</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#module-glotter.core.project">glotter.core.project</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#glotter.core.project.AcronymScheme"><code class="docutils literal notranslate"><span class="pre">AcronymScheme</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#glotter.core.project.CoreProject"><code class="docutils literal notranslate"><span class="pre">CoreProject</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#glotter.core.project.CoreProject.display_name"><code class="docutils literal notranslate"><span class="pre">CoreProject.display_name</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#glotter.core.project.CoreProject.get_project_name_by_scheme"><code class="docutils literal notranslate"><span class="pre">CoreProject.get_project_name_by_scheme()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#glotter-core-project">glotter.core.project</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#enumerations">Enumerations</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#glotter.core.project.AcronymScheme"><code class="docutils literal notranslate"><span class="pre">AcronymScheme</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#glotter.core.project.NamingScheme"><code class="docutils literal notranslate"><span class="pre">NamingScheme</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#glotter.core.project.NamingScheme"><code class="docutils literal notranslate"><span class="pre">NamingScheme</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#classes">Classes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#glotter.core.project.CoreProject"><code class="docutils literal notranslate"><span class="pre">CoreProject</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#glotter.core.project.CoreProjectMixin"><code class="docutils literal notranslate"><span class="pre">CoreProjectMixin</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#module-glotter.core.testinfo">glotter.core.testinfo</a><ul>
@@ -111,9 +114,10 @@
              
   <section id="api">
 <h1>API<a class="headerlink" href="#api" title="Link to this heading"></a></h1>
-<section id="module-glotter.core.project">
-<span id="glotter-core-project"></span><h2>glotter.core.project<a class="headerlink" href="#module-glotter.core.project" title="Link to this heading"></a></h2>
-<p>Project information, acronym schemes, and naming schemes.</p>
+<section id="glotter-core-project">
+<h2>glotter.core.project<a class="headerlink" href="#glotter-core-project" title="Link to this heading"></a></h2>
+<section id="enumerations">
+<h3>Enumerations<a class="headerlink" href="#enumerations" title="Link to this heading"></a></h3>
 <dl class="py class">
 <dt class="sig sig-object py" id="glotter.core.project.AcronymScheme">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">glotter.core.project.</span></span><span class="sig-name descname"><span class="pre">AcronymScheme</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/glotter/core/project.html#AcronymScheme"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#glotter.core.project.AcronymScheme" title="Link to this definition"></a></dt>
@@ -130,52 +134,6 @@ match, then the acronym scheme applies.</p>
 </ul>
 </dd>
 </dl>
-</dd></dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="glotter.core.project.CoreProject">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">glotter.core.project.</span></span><span class="sig-name descname"><span class="pre">CoreProject</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">words:</span> <span class="pre">list[str],</span> <span class="pre">acronyms:</span> <span class="pre">list[str]</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;,</span> <span class="pre">acronym_scheme:</span> <span class="pre">~glotter.core.project.AcronymScheme</span> <span class="pre">=</span> <span class="pre">AcronymScheme.two_letter_limit</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/glotter/core/project.html#CoreProject"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#glotter.core.project.CoreProject" title="Link to this definition"></a></dt>
-<dd><p>Project information</p>
-<dl class="field-list simple">
-<dt class="field-odd">Variables<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>words</strong> – Project words</p></li>
-<li><p><strong>acronyms</strong> – Optional project acronyms. Default is no acronyms</p></li>
-<li><p><strong>acronym_scheme</strong> – Optional project acronym scheme. Default is
-<code class="docutils literal notranslate"><span class="pre">two_letter_limit</span></code></p></li>
-</ul>
-</dd>
-</dl>
-<dl class="py property">
-<dt class="sig sig-object py" id="glotter.core.project.CoreProject.display_name">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">display_name</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#glotter.core.project.CoreProject.display_name" title="Link to this definition"></a></dt>
-<dd><p>Get display name for the project. The project words are separated by
-an spaces, subject to the acronym scheme – e.g., <code class="docutils literal notranslate"><span class="pre">hello</span> <span class="pre">world</span></code>).</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Display name</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="glotter.core.project.CoreProject.get_project_name_by_scheme">
-<span class="sig-name descname"><span class="pre">get_project_name_by_scheme</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">naming</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#glotter.core.project.NamingScheme" title="glotter.core.project.NamingScheme"><span class="pre">NamingScheme</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="_modules/glotter/core/project.html#CoreProject.get_project_name_by_scheme"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#glotter.core.project.CoreProject.get_project_name_by_scheme" title="Link to this definition"></a></dt>
-<dd><p>Get project name by on the specified naming scheme, the acronym scheme,
-the project words, and the project acronyms</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>naming</strong> – Naming scheme</p>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Project name</p>
-</dd>
-<dt class="field-odd">Raises<span class="colon">:</span></dt>
-<dd class="field-odd"><p><code class="xref py py-exc docutils literal notranslate"><span class="pre">KeyError</span></code> if invalid naming scheme</p>
-</dd>
-</dl>
-</dd></dl>
-
 </dd></dl>
 
 <dl class="py class">
@@ -200,6 +158,80 @@ and all words are joined together (e.g., <code class="docutils literal notransla
 </dl>
 </dd></dl>
 
+</section>
+<section id="classes">
+<h3>Classes<a class="headerlink" href="#classes" title="Link to this heading"></a></h3>
+<dl class="py class">
+<dt class="sig sig-object py" id="glotter.core.project.CoreProject">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">glotter.core.project.</span></span><span class="sig-name descname"><span class="pre">CoreProject</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">words:</span> <span class="pre">list[str],</span> <span class="pre">acronyms:</span> <span class="pre">list[str]</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;,</span> <span class="pre">acronym_scheme:</span> <span class="pre">str</span> <span class="pre">|</span> <span class="pre">~glotter.core.project.AcronymScheme</span> <span class="pre">=</span> <span class="pre">AcronymScheme.two_letter_limit</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/glotter/core/project.html#CoreProject"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#glotter.core.project.CoreProject" title="Link to this definition"></a></dt>
+<dd><p>Project information. This class uses <a class="reference internal" href="#glotter.core.project.CoreProjectMixin" title="glotter.core.project.CoreProjectMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">CoreProjectMixin</span></code></a> to implement
+its functionality</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>words</strong> – Project words</p></li>
+<li><p><strong>acronyms</strong> – Optional project acronyms. Default is no acronyms</p></li>
+<li><p><strong>acronym_scheme</strong> – Optional project acronym scheme. Default is
+<code class="docutils literal notranslate"><span class="pre">two_letter_limit</span></code></p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><code class="xref py py-exc docutils literal notranslate"><span class="pre">ValueError</span></code> if invalid acronym scheme</p>
+</dd>
+<dt class="field-odd">Variables<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>words</strong> – Project words</p></li>
+<li><p><strong>acronyms</strong> – Optional project acronyms. Default is no acronyms</p></li>
+<li><p><strong>acronym_scheme</strong> – Optional project acronym scheme. Default is
+<code class="docutils literal notranslate"><span class="pre">two_letter_limit</span></code></p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="glotter.core.project.CoreProjectMixin">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">glotter.core.project.</span></span><span class="sig-name descname"><span class="pre">CoreProjectMixin</span></span><a class="reference internal" href="_modules/glotter/core/project.html#CoreProjectMixin"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#glotter.core.project.CoreProjectMixin" title="Link to this definition"></a></dt>
+<dd><p>Mixin that can be used in a parent class to get to get project information.</p>
+<p>The parent class must contain the following instance variables:</p>
+<ul class="simple">
+<li><p><strong>words</strong> - Project words</p></li>
+<li><p><strong>acronyms</strong> - Project acronyms</p></li>
+<li><p><strong>acronym_scheme</strong> - Acronym scheme</p></li>
+</ul>
+<dl class="py property">
+<dt class="sig sig-object py" id="glotter.core.project.CoreProjectMixin.display_name">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">display_name</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#glotter.core.project.CoreProjectMixin.display_name" title="Link to this definition"></a></dt>
+<dd><p>Get display name for the project. The project words are separated by
+an spaces, subject to the acronym scheme – e.g., <code class="docutils literal notranslate"><span class="pre">hello</span> <span class="pre">world</span></code>).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Display name</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="glotter.core.project.CoreProjectMixin.get_project_name_by_scheme">
+<span class="sig-name descname"><span class="pre">get_project_name_by_scheme</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">naming</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="#glotter.core.project.NamingScheme" title="glotter.core.project.NamingScheme"><span class="pre">NamingScheme</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="_modules/glotter/core/project.html#CoreProjectMixin.get_project_name_by_scheme"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#glotter.core.project.CoreProjectMixin.get_project_name_by_scheme" title="Link to this definition"></a></dt>
+<dd><p>Get project name by on the specified naming scheme, the acronym scheme,
+the project words, and the project acronyms</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>naming</strong> – Naming scheme</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Project name</p>
+</dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="xref py py-exc docutils literal notranslate"><span class="pre">ValueError</span></code> if invalid naming scheme</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
 </section>
 <section id="module-glotter.core.testinfo">
 <span id="glotter-core-testinfo"></span><h2>glotter.core.testinfo<a class="headerlink" href="#module-glotter.core.testinfo" title="Link to this heading"></a></h2>
@@ -245,14 +277,14 @@ and all words are joined together (e.g., <code class="docutils literal notransla
 <li><p><strong>naming</strong> – string containing the naming scheme for files in the directory</p></li>
 </ul>
 </dd>
-<dt class="field-even">Variables<span class="colon">:</span></dt>
-<dd class="field-even"><ul class="simple">
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><code class="xref py py-exc docutils literal notranslate"><span class="pre">ValueError</span></code> if invalid naming scheme</p>
+</dd>
+<dt class="field-odd">Variables<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
 <li><p><strong>extension</strong> – the file extension that is considered as source</p></li>
 <li><p><strong>naming</strong> (<a class="reference internal" href="#glotter.core.project.NamingScheme" title="glotter.core.project.NamingScheme"><em>NamingScheme</em></a>) – the naming scheme for files in the directory</p></li>
 </ul>
-</dd>
-<dt class="field-odd">Raises<span class="colon">:</span></dt>
-<dd class="field-odd"><p><code class="xref py py-exc docutils literal notranslate"><span class="pre">KeyError</span></code> if invalid naming scheme</p>
 </dd>
 </dl>
 <dl class="py method">
@@ -271,7 +303,7 @@ and all words are joined together (e.g., <code class="docutils literal notransla
 
 <dl class="py method">
 <dt class="sig sig-object py" id="glotter.core.testinfo.FolderInfo.get_project_mappings">
-<span class="sig-name descname"><span class="pre">get_project_mappings</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">projects</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#glotter.core.project.CoreProject" title="glotter.core.project.CoreProject"><span class="pre">CoreProject</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">include_extension</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/glotter/core/testinfo.html#FolderInfo.get_project_mappings"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#glotter.core.testinfo.FolderInfo.get_project_mappings" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">get_project_mappings</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">projects</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#glotter.core.project.CoreProjectMixin" title="glotter.core.project.CoreProjectMixin"><span class="pre">CoreProjectMixin</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">include_extension</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/glotter/core/testinfo.html#FolderInfo.get_project_mappings"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#glotter.core.testinfo.FolderInfo.get_project_mappings" title="Link to this definition"></a></dt>
 <dd><p>Uses the naming scheme to generate the expected source names in the directory
 and create a mapping from project type to source name</p>
 <dl class="field-list simple">
