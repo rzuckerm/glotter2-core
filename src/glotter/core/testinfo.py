@@ -6,8 +6,7 @@ from typing import Optional
 import yaml
 from jinja2 import BaseLoader, Environment
 
-from .base import BaseProject
-from .constants import NamingScheme
+from .project import CoreProjectMixin, NamingScheme
 
 
 @dataclass(frozen=True)
@@ -62,7 +61,7 @@ class FolderInfo:
             raise ValueError(f'Unknown naming scheme: "{self.naming}"') from e
 
     def get_project_mappings(
-        self, projects: dict[str, BaseProject], include_extension: bool = False
+        self, projects: dict[str, CoreProjectMixin], include_extension: bool = False
     ) -> dict[str, str]:
         """
         Uses the naming scheme to generate the expected source names in the directory

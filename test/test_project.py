@@ -1,7 +1,6 @@
 import pytest
 
-from glotter.core.constants import AcronymScheme, NamingScheme
-from glotter.core.project import CoreProject
+from glotter.core.project import AcronymScheme, CoreProject, NamingScheme
 
 project_scheme_permutation_map = [
     {
@@ -220,8 +219,8 @@ def test_get_project_name_by_scheme(words, acronyms, naming_scheme, acronym_sche
     [
         pytest.param("hyphen", "hello-world", id="hyphen"),
         pytest.param("underscore", "hello_world", id="underscore"),
-        pytest.param("camel", "HelloWorld", id="camel"),
-        pytest.param("pascal", "helloWorld", id="pascal"),
+        pytest.param("camel", "helloWorld", id="camel"),
+        pytest.param("pascal", "HelloWorld", id="pascal"),
         pytest.param("lower", "helloworld", id="lower"),
     ],
 )

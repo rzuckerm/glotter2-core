@@ -1,39 +1,60 @@
 """Project information, acronym schemes, and naming schemes."""
 
 from dataclasses import dataclass, field
+from enum import Enum
 from typing import Union
 
-from .constants import AcronymScheme, NamingScheme
 
-
-@dataclass(frozen=True)
-class CoreProject:
+class NamingScheme(Enum):
     """
-    Project information
+    Naming scheme for project filename. This defines how the project words are
+    converted to a filename.
 
-    :param words: Project words
-    :param acronyms: Optional project acronyms. Default is no acronyms
-    :param acronym_scheme: Optional project acronym scheme. Default is
-        ``two_letter_limit``
-    :raises: :exc:`ValueError` if invalid acronym scheme
-
-    :ivar words: Project words
-    :ivar acronyms: Optional project acronyms. Default is no acronyms
-    :ivar acronym_scheme: Optional project acronym scheme. Default is
-        ``two_letter_limit``
+    :ivar hyphen: all words are separated by a hyphen (e.g., ``hello-world``)
+    :ivar underscore: all words are separated by underscore (e.g.,
+        ``hello_world``)
+    :ivar camel: the first word is lowercase, the remaining words are title case,
+        and all words are joined together (e.g., ``helloWorld``)
+    :ivar pascal: all words are title case and joined together (e.g.,
+        ``HelloWorld``)
+    :ivar lower: all words are lowercase and joined together (e.g.,
+        ``helloworld``)
     """
 
-    words: list[str]
-    acronyms: list[str] = field(default_factory=list)
-    acronym_scheme: Union[str, AcronymScheme] = AcronymScheme.two_letter_limit
+    hyphen = "hyphen"
+    underscore = "underscore"
+    camel = "camel"
+    pascal = "pascal"
+    lower = "lower"
 
-    def __post_init__(self):
-        object.__setattr__(self, "acronyms", [acronym.upper() for acronym in self.acronyms])
-        if not isinstance(self.acronym_scheme, AcronymScheme):
-            try:
-                object.__setattr__(self, "acronym_scheme", AcronymScheme[self.acronym_scheme])
-            except KeyError as e:
-                raise ValueError(f'Unknown acronym scheme: "{self.acronym_scheme}"') from e
+
+class AcronymScheme(Enum):
+    """
+    The acronym scheme overrides the naming scheme (:class:`NamingScheme`).
+    Each project word is checked against a list of acronyms. If there is a
+    match, then the acronym scheme applies.
+
+    :ivar lower: acronym word is lowercase
+    :ivar upper: acronym word is uppercase
+    :ivar two_letter_limit: acronym word is uppercase if the naming scheme is
+        ``camel`` or ``pascal``
+    """
+
+    lower = "lower"
+    upper = "upper"
+    two_letter_limit = "two_letter_limit"
+
+
+class CoreProjectMixin:
+    """
+    Mixin that can be used in a parent class to get to get project information.
+
+    The parent class must contain the following instance variables:
+
+    - **words** - Project words
+    - **acronyms** - Project acronyms
+    - **acronym_scheme** - Acronym scheme
+    """
 
     def get_project_name_by_scheme(self, naming: Union[str, NamingScheme]) -> str:
         """
@@ -42,7 +63,7 @@ class CoreProject:
 
         :param naming: Naming scheme
         :return: Project name
-        :raises: :exc:`Value` if invalid naming scheme
+        :raises: :exc:`ValueError` if invalid naming scheme
         """
 
         try:
@@ -112,4 +133,35 @@ class CoreProject:
         return word
 
 
-__all__ = ["CoreProject"]
+@dataclass(frozen=True)
+class CoreProject(CoreProjectMixin):
+    """
+    Project information. This class uses :class:`CoreProjectMixin` to implement
+    its functionality
+
+    :param words: Project words
+    :param acronyms: Optional project acronyms. Default is no acronyms
+    :param acronym_scheme: Optional project acronym scheme. Default is
+        ``two_letter_limit``
+    :raises: :exc:`ValueError` if invalid acronym scheme
+
+    :ivar words: Project words
+    :ivar acronyms: Optional project acronyms. Default is no acronyms
+    :ivar acronym_scheme: Optional project acronym scheme. Default is
+        ``two_letter_limit``
+    """
+
+    words: list[str]
+    acronyms: list[str] = field(default_factory=list)
+    acronym_scheme: Union[str, AcronymScheme] = AcronymScheme.two_letter_limit
+
+    def __post_init__(self):
+        object.__setattr__(self, "acronyms", [acronym.upper() for acronym in self.acronyms])
+        if not isinstance(self.acronym_scheme, AcronymScheme):
+            try:
+                object.__setattr__(self, "acronym_scheme", AcronymScheme[self.acronym_scheme])
+            except KeyError as e:
+                raise ValueError(f'Unknown acronym scheme: "{self.acronym_scheme}"') from e
+
+
+__all__ = ["AcronymScheme", "CoreProject", "CoreProjectMixin", "NamingScheme"]

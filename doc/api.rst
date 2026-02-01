@@ -1,22 +1,25 @@
 API
 ===
 
-glotter.core.base
------------------
-
-.. automodule:: glotter.core.base
-   :members:
-
-glotter.core.constants
-----------------------
-
-.. automodule:: glotter.core.constants
-   :members:
-
 glotter.core.project
 --------------------
 
-.. automodule:: glotter.core.project
+Enumerations
+~~~~~~~~~~~~
+
+.. autoclass:: glotter.core.project.AcronymScheme
+   :members:
+
+.. autoclass:: glotter.core.project.NamingScheme
+   :members:
+
+Classes
+~~~~~~~
+
+.. autoclass:: glotter.core.project.CoreProject
+   :members:
+
+.. autoclass:: glotter.core.project.CoreProjectMixin
    :members:
 
 glotter.core.testinfo

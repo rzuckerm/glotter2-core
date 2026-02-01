@@ -4,7 +4,8 @@ version = "0.1.0"
 description = "A simple, lightweight core library glotter2"
 readme = "README.md"
 authors = [
-    { name = "rzuckerm" }
+    { name = "rzuckerm" },
+    { name = "auroq" },
 ]
 requires-python = ">=3.9,<4.0"
 license = {text = "LICENSE.txt"}
