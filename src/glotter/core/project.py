@@ -1,8 +1,9 @@
 """Project information, acronym schemes, and naming schemes."""
 
+from __future__ import annotations
+
 from dataclasses import dataclass, field
 from enum import Enum
-from typing import Union
 
 
 class NamingScheme(Enum):
@@ -56,7 +57,7 @@ class CoreProjectMixin:
     - **acronym_scheme** - Acronym scheme
     """
 
-    def get_project_name_by_scheme(self, naming: Union[str, NamingScheme]) -> str:
+    def get_project_name_by_scheme(self, naming: str | NamingScheme) -> str:
         """
         Get project name by on the specified naming scheme, the acronym scheme,
         the project words, and the project acronyms
@@ -141,19 +142,19 @@ class CoreProject(CoreProjectMixin):
 
     :param words: Project words
     :param acronyms: Optional project acronyms. Default is no acronyms
-    :param acronym_scheme: Optional project acronym scheme. Default is
-        ``two_letter_limit``
+    :param str | AcronymScheme acronym_scheme: Optional project acronym scheme.
+        Default is :const:`AcroymScheme.two_letter_limit`
     :raises: :exc:`ValueError` if invalid acronym scheme
 
     :ivar words: Project words
     :ivar acronyms: Optional project acronyms. Default is no acronyms
-    :ivar acronym_scheme: Optional project acronym scheme. Default is
-        ``two_letter_limit``
+    :ivar AcronymScheme acronym_scheme: Optional project acronym scheme. Default is
+        :const:`AcroymScheme.two_letter_limit`
     """
 
     words: list[str]
     acronyms: list[str] = field(default_factory=list)
-    acronym_scheme: Union[str, AcronymScheme] = AcronymScheme.two_letter_limit
+    acronym_scheme: str | AcronymScheme = AcronymScheme.two_letter_limit
 
     def __post_init__(self):
         object.__setattr__(self, "acronyms", [acronym.upper() for acronym in self.acronyms])

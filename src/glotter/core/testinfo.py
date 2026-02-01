@@ -1,5 +1,7 @@
 """Container, folder, and test information"""
 
+from __future__ import annotations
+
 from dataclasses import dataclass
 from typing import Optional
 
@@ -25,7 +27,7 @@ class ContainerInfo:
     build: Optional[str] = None
 
     @classmethod
-    def from_dict(cls, dictionary: dict[str, str]) -> "ContainerInfo":
+    def from_dict(cls, dictionary: dict[str, str]) -> ContainerInfo:
         """
         Create a ContainerInfo from a dictionary
 
@@ -44,7 +46,7 @@ class FolderInfo:
     """Metadata about sources in a directory
 
     :param extension: the file extension that is considered as source
-    :param naming: string containing the naming scheme for files in the directory
+    :param str naming: string containing the naming scheme for files in the directory
     :raises: :exc:`ValueError` if invalid naming scheme
 
     :ivar extension: the file extension that is considered as source
@@ -79,7 +81,7 @@ class FolderInfo:
         }
 
     @classmethod
-    def from_dict(cls, dictionary: dict[str, str]) -> "FolderInfo":
+    def from_dict(cls, dictionary: dict[str, str]) -> FolderInfo:
         """
         Create a FileInfo from a dictionary
 
@@ -103,7 +105,7 @@ class TestInfo:
     __test__ = False  # Indicate this is not a test
 
     @classmethod
-    def from_dict(cls, dictionary: dict[str, str]) -> "TestInfo":
+    def from_dict(cls, dictionary: dict[str, str]) -> TestInfo:
         """
         Create a TestInfo from a dictionary
 
@@ -116,7 +118,7 @@ class TestInfo:
         )
 
     @classmethod
-    def from_string(cls, string: str, source) -> "TestInfo":
+    def from_string(cls, string: str, source) -> TestInfo:
         """
         Create a TestInfo from a string. Modify the string using Jinja2 templating.
         Then parse it as yaml

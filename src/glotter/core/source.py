@@ -13,7 +13,7 @@ class CoreSource:
     :param filename: filename including extension
     :param language: the language of the source
     :param path: path to the file excluding name
-    :param test_info: a string in yaml format containing testinfo for a directory
+    :param str test_info: a string in yaml format containing testinfo for a directory
 
     :ivar filename: filename including extension
     :ivar language: the language of the source
