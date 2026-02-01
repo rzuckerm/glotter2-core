@@ -72,9 +72,10 @@
   <h1>Source code for glotter.core.project</h1><div class="highlight"><pre>
 <span></span><span class="sd">&quot;&quot;&quot;Project information, acronym schemes, and naming schemes.&quot;&quot;&quot;</span>
 
+<span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
+
 <span class="kn">from</span><span class="w"> </span><span class="nn">dataclasses</span><span class="w"> </span><span class="kn">import</span> <span class="n">dataclass</span><span class="p">,</span> <span class="n">field</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">enum</span><span class="w"> </span><span class="kn">import</span> <span class="n">Enum</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Union</span>
 
 
 <div class="viewcode-block" id="NamingScheme">
@@ -138,7 +139,7 @@
 
 <div class="viewcode-block" id="CoreProjectMixin.get_project_name_by_scheme">
 <a class="viewcode-back" href="../../../api.html#glotter.core.project.CoreProjectMixin.get_project_name_by_scheme">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">get_project_name_by_scheme</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">naming</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">NamingScheme</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_project_name_by_scheme</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">naming</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">NamingScheme</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Get project name by on the specified naming scheme, the acronym scheme,</span>
 <span class="sd">        the project words, and the project acronyms</span>
@@ -227,19 +228,19 @@
 
 <span class="sd">    :param words: Project words</span>
 <span class="sd">    :param acronyms: Optional project acronyms. Default is no acronyms</span>
-<span class="sd">    :param acronym_scheme: Optional project acronym scheme. Default is</span>
-<span class="sd">        ``two_letter_limit``</span>
+<span class="sd">    :param str | AcronymScheme acronym_scheme: Optional project acronym scheme.</span>
+<span class="sd">        Default is :const:`AcroymScheme.two_letter_limit`</span>
 <span class="sd">    :raises: :exc:`ValueError` if invalid acronym scheme</span>
 
 <span class="sd">    :ivar words: Project words</span>
 <span class="sd">    :ivar acronyms: Optional project acronyms. Default is no acronyms</span>
-<span class="sd">    :ivar acronym_scheme: Optional project acronym scheme. Default is</span>
-<span class="sd">        ``two_letter_limit``</span>
+<span class="sd">    :ivar AcronymScheme acronym_scheme: Optional project acronym scheme. Default is</span>
+<span class="sd">        :const:`AcroymScheme.two_letter_limit`</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">words</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
     <span class="n">acronyms</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="nb">list</span><span class="p">)</span>
-    <span class="n">acronym_scheme</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">AcronymScheme</span><span class="p">]</span> <span class="o">=</span> <span class="n">AcronymScheme</span><span class="o">.</span><span class="n">two_letter_limit</span>
+    <span class="n">acronym_scheme</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">AcronymScheme</span> <span class="o">=</span> <span class="n">AcronymScheme</span><span class="o">.</span><span class="n">two_letter_limit</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">__post_init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="nb">object</span><span class="o">.</span><span class="fm">__setattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;acronyms&quot;</span><span class="p">,</span> <span class="p">[</span><span class="n">acronym</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span> <span class="k">for</span> <span class="n">acronym</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">acronyms</span><span class="p">])</span>
