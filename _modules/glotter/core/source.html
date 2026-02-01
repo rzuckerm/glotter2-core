@@ -84,16 +84,21 @@
 <span class="k">class</span><span class="w"> </span><span class="nc">CoreSource</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Metadata about a source file</span>
 
-<span class="sd">    :ivar fullname: filename including extension</span>
+<span class="sd">    :param filename: filename including extension</span>
+<span class="sd">    :param language: the language of the source</span>
+<span class="sd">    :param path: path to the file excluding name</span>
+<span class="sd">    :param test_info: a string in yaml format containing testinfo for a directory</span>
+
+<span class="sd">    :ivar filename: filename including extension</span>
 <span class="sd">    :ivar language: the language of the source</span>
 <span class="sd">    :ivar path: path to the file excluding name</span>
-<span class="sd">    :ivar test_info: TestInfo object</span>
+<span class="sd">    :ivar TestInfo test_info: TestInfo object</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">filename</span><span class="p">:</span> <span class="nb">str</span>
     <span class="n">language</span><span class="p">:</span> <span class="nb">str</span>
     <span class="n">path</span><span class="p">:</span> <span class="nb">str</span>
-    <span class="n">test_info</span><span class="p">:</span> <span class="n">TestInfo</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="nb">repr</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">test_info</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="nb">repr</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">__post_init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="nb">object</span><span class="o">.</span><span class="fm">__setattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;test_info&quot;</span><span class="p">,</span> <span class="n">TestInfo</span><span class="o">.</span><span class="n">from_string</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">test_info</span><span class="p">,</span> <span class="bp">self</span><span class="p">))</span>

@@ -124,15 +124,15 @@
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Metadata about sources in a directory</span>
 
 <span class="sd">    :param extension: the file extension that is considered as source</span>
-<span class="sd">    :param naming: the naming scheme for files in the directory</span>
+<span class="sd">    :param naming: string containing the naming scheme for files in the directory</span>
 
 <span class="sd">    :ivar extension: the file extension that is considered as source</span>
-<span class="sd">    :ivar naming: the naming scheme for files in the directory</span>
+<span class="sd">    :ivar NamingScheme naming: the naming scheme for files in the directory</span>
 <span class="sd">    :raises: :exc:`KeyError` if invalid naming scheme</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">extension</span><span class="p">:</span> <span class="nb">str</span>
-    <span class="n">naming</span><span class="p">:</span> <span class="n">NamingScheme</span>
+    <span class="n">naming</span><span class="p">:</span> <span class="nb">str</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">__post_init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">try</span><span class="p">:</span>
