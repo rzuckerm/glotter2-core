@@ -17,11 +17,11 @@ For getting started with Glotter2-Core, refer to our [documentation](https://rzu
 
 ## Contributing
 
-If you'd like to contribute to Glotter2, read our [contributing guidelines](./CONTRIBUTING.md).
+If you'd like to contribute to Glotter2-Core, read our [contributing guidelines](./CONTRIBUTING.md).
 
 ## Changelog
 
-### Glotter2 releases
+### Glotter2-Core releases
 
 * Future:
   * Initial release
