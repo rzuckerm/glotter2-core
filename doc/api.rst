@@ -33,3 +33,9 @@ glotter.core.source
 
 .. automodule:: glotter.core.source
    :members:
+
+glotter.core.settings
+---------------------
+
+.. automodule:: glotter.core.settings
+   :members:

@@ -1,11 +1,12 @@
-import os
 import sys
+from pathlib import Path
 
 # Ensure the project's `src` directory is on sys.path so Sphinx can import packages
-ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
-SYS_SRC = os.path.abspath(os.path.join(ROOT, "src"))
+ROOT = str(Path(__file__).parent.parent.absolute())
+SYS_SRC = str(Path(ROOT) / "src")
 if SYS_SRC not in sys.path:
     sys.path.insert(0, SYS_SRC)
+
 project = "Glotter 2-Core"
 copyright = ""
 author = ""

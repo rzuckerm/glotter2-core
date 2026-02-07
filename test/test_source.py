@@ -1,4 +1,4 @@
-import os
+from pathlib import Path
 
 import pytest
 
@@ -74,10 +74,10 @@ def test_full_path():
     src = CoreSource(
         filename="name.py",
         language="python",
-        path=os.path.join("this", "is", "a", "path"),
+        path=str(Path("this", "is", "a", "path")),
         test_info=TEST_INFO_STRING_NO_BUILD,
     )
-    expected = os.path.join("this", "is", "a", "path", "name.py")
+    expected = str(Path("this", "is", "a", "path", "name.py"))
     actual = src.full_path
     assert actual == expected
 
@@ -90,7 +90,7 @@ def test_basename_and_extension(filename, expected_name, expected_extension):
     src = CoreSource(
         filename=filename,
         language="python",
-        path=os.path.join("this", "is", "a", "path"),
+        path=str(Path("this", "is", "a", "path")),
         test_info=TEST_INFO_STRING_NO_BUILD,
     )
     assert src.name == expected_name

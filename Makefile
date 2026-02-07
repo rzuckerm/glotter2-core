@@ -1,7 +1,7 @@
 PACKAGE := src/glotter/core
 TESTS := test
 CONFIG_FILE = pyproject.toml
-ALL = $(PACKAGE) $(TESTS)
+ALL = $(PACKAGE) $(TESTS) doc
 UV_VERSION = $(shell sed -nr 's/uv-version: "([^"]+)"/\1/p' repo-config.yml)
 
 SHELL := bash

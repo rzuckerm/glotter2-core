@@ -1,7 +1,7 @@
 """Source information"""
 
-import os
 from dataclasses import dataclass, field
+from pathlib import Path
 
 from glotter.core.testinfo import TestInfo
 
@@ -32,7 +32,7 @@ class CoreSource:
     @property
     def full_path(self) -> str:
         """Returns the full path to the source including filename and extension"""
-        return os.path.join(self.path, self.filename)
+        return str(Path(self.path) / self.filename)
 
     @property
     def name(self) -> str:
