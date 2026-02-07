@@ -65,10 +65,10 @@ def test_settings_parser_when_bad_glotter_yml_exists(tmp_dir: str):
     [
         pytest.param("empty_glotter", id="empty"),
         pytest.param("good_glotter", id="no-acronym-scheme-or-source-root"),
-        pytest.param("good_glotter_with_source_and_acronyms", id="acronym-scheme-and-source-root")
+        pytest.param("good_glotter_with_source_and_acronyms", id="acronym-scheme-and-source-root"),
     ],
 )
-def test_settings_when_good_yml(filename_no_ext, tmp_dir_chdir):
+def test_settings_when_good_yml(filename_no_ext: str, tmp_dir_chdir: str):
     shutil.copy(TEST_DATA_DIR / f"{filename_no_ext}.yml", ".glotter.yml")
 
     settings = CoreSettings()
@@ -87,3 +87,28 @@ def test_settings_when_good_yml(filename_no_ext, tmp_dir_chdir):
         name: CoreProject(**project) for name, project in expected_project_items.items()
     }
     assert settings.projects == expected_projects
+
+
+@pytest.mark.parametrize(
+    ("filename", "expected_error"),
+    [
+        pytest.param(
+            "bad_glotter_settings.yml", "settings does not contain a dict", id="bad-settings"
+        ),
+        pytest.param(
+            "bad_glotter_acronym_scheme.yml",
+            'Unknown acronym scheme: "bad"',
+            id="bad-acronym-scheme",
+        ),
+        pytest.param(
+            "bad_glotter_projects.yml", "projects does not contain a dict", id="bad-projects"
+        ),
+    ],
+)
+def test_settings_when_bad_yml(filename: str, expected_error: str, tmp_dir_chdir: str):
+    shutil.copy(TEST_DATA_DIR / filename, ".glotter.yml")
+
+    with pytest.raises(ValueError) as exc:
+        CoreSettings()
+
+    assert expected_error in str(exc.value)
