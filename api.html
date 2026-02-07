@@ -85,6 +85,10 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#module-glotter.core.settings">glotter.core.settings</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#glotter.core.settings.CoreSettings"><code class="docutils literal notranslate"><span class="pre">CoreSettings</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#glotter.core.settings.CoreSettings.projects"><code class="docutils literal notranslate"><span class="pre">CoreSettings.projects</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="#glotter.core.settings.CoreSettingsParser"><code class="docutils literal notranslate"><span class="pre">CoreSettingsParser</span></code></a></li>
 </ul>
 </li>
@@ -423,9 +427,36 @@ Then parse it as yaml</p>
 <span id="glotter-core-settings"></span><h2>glotter.core.settings<a class="headerlink" href="#module-glotter.core.settings" title="Link to this heading"></a></h2>
 <p>Project settings</p>
 <dl class="py class">
+<dt class="sig sig-object py" id="glotter.core.settings.CoreSettings">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">glotter.core.settings.</span></span><span class="sig-name descname"><span class="pre">CoreSettings</span></span><a class="reference internal" href="_modules/glotter/core/settings.html#CoreSettings"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#glotter.core.settings.CoreSettings" title="Link to this definition"></a></dt>
+<dd><p>Global project settings</p>
+<dl class="field-list simple">
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="xref py py-exc docutils literal notranslate"><span class="pre">ValueError</span></code> if invalid settings</p>
+</dd>
+<dt class="field-even">Variables<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>project_root</strong> – Root directory of project</p></li>
+<li><p><strong>source_root</strong> – Root directory for source files</p></li>
+<li><p><strong>acronym_scheme</strong> – Optional project acronym scheme.
+Default is <code class="xref py py-const docutils literal notranslate"><span class="pre">AcroymScheme.two_letter_limit</span></code></p></li>
+<li><p><strong>projects</strong> – Dictionary whose key is the project name and whose value
+is the project information</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="glotter.core.settings.CoreSettings.projects">
+<span class="sig-name descname"><span class="pre">projects</span></span><a class="headerlink" href="#glotter.core.settings.CoreSettings.projects" title="Link to this definition"></a></dt>
+<dd><p>alias of <code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
 <dt class="sig sig-object py" id="glotter.core.settings.CoreSettingsParser">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">glotter.core.settings.</span></span><span class="sig-name descname"><span class="pre">CoreSettingsParser</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">project_root:</span> <span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">yml_path:</span> <span class="pre">str</span> <span class="pre">|</span> <span class="pre">None</span> <span class="pre">=</span> <span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">yml:</span> <span class="pre">dict[str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Any]</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/glotter/core/settings.html#CoreSettingsParser"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#glotter.core.settings.CoreSettingsParser" title="Link to this definition"></a></dt>
-<dd><p>Parse the setting file (<code class="docutils literal notranslate"><span class="pre">.glotter.yml</span></code>)</p>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">glotter.core.settings.</span></span><span class="sig-name descname"><span class="pre">CoreSettingsParser</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">project_root</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/glotter/core/settings.html#CoreSettingsParser"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#glotter.core.settings.CoreSettingsParser" title="Link to this definition"></a></dt>
+<dd><p>Parse the settings file (<code class="docutils literal notranslate"><span class="pre">.glotter.yml</span></code>)</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>project_root</strong> – Root directory of project</p>
