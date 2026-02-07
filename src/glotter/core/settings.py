@@ -10,10 +10,65 @@ from warnings import warn
 
 import yaml
 
+from .project import AcronymScheme, CoreProject
 
-@dataclass(frozen=True)
+
+@dataclass(frozen=True, init=False)
+class CoreSettings:
+    """Global project settings
+
+    :raises: :exc:`ValueError` if invalid settings
+
+    :ivar project_root: Root directory of project
+    :ivar source_root: Root directory for source files
+    :ivar acronym_scheme: Optional project acronym scheme.
+        Default is :const:`AcroymScheme.two_letter_limit`
+    :ivar projects: Dictionary whose key is the project name and whose value
+        is the project information
+    """
+
+    project_root: str = ""
+    acronym_scheme: AcronymScheme = AcronymScheme.two_letter_limit
+    source_root: str = ""
+    projects: dict[str | CoreProject] = field(default=dict)
+
+    def __init__(self) -> None:
+        object.__setattr__(self, "project_root", str(Path.cwd()))
+        parser = CoreSettingsParser(self.project_root)
+        self._set_global_settings(parser.yml.get("settings", {}))
+        self._set_projects(parser.yml.get("projects", {}))
+
+    def _set_global_settings(self, settings_item: Any) -> None:
+        if not isinstance(settings_item, dict):
+            raise ValueError("settings does not contain a dict")
+
+        acronym_scheme = settings_item.get("acronym_scheme", "two_letter_limit")
+        try:
+            object.__setattr__(self, "acronym_scheme", AcronymScheme[acronym_scheme])
+        except KeyError:
+            raise ValueError(f'Unknown acronym scheme: "{acronym_scheme}"')
+
+        source_root = settings_item.get("source_root") or self.project_root
+        object.__setattr__(self, "source_root", str(Path(source_root).absolute()))
+
+    def _set_projects(self, projects_item: Any) -> None:
+        if not isinstance(projects_item, dict):
+            raise ValueError("projects does not contain a dict")
+
+        projects = {
+            name: CoreProject(
+                words=project.get("words", []),
+                acronyms=project.get("acronyms", []),
+                acronym_scheme=self.acronym_scheme,
+            )
+            for name, project in projects_item.items()
+        }
+        object.__setattr__(self, "projects", projects)
+
+
+@dataclass(frozen=True, init=False)
 class CoreSettingsParser:
-    """Parse the setting file (``.glotter.yml``)
+    """Parse the settings file (``.glotter.yml``)
 
     :param project_root: Root directory of project
     :raises: :exc:`ValueError` if setting file does not contain a dictionary
@@ -25,9 +80,10 @@ class CoreSettingsParser:
 
     project_root: str
     yml_path: str | None = None
-    yml: dict[str, Any] = field(default_factory=dict)
+    yml: dict[str, Any] = field(default_factory=dict, repr=False)
 
-    def __post_init__(self):
+    def __init__(self, project_root):
+        object.__setattr__(self, "project_root", project_root)
         object.__setattr__(self, "yml_path", self._locate_yml())
 
         yml = None
@@ -57,4 +113,4 @@ class CoreSettingsParser:
         return None
 
 
-__all__ = ["CoreSettingsParser"]
+__all__ = ["CoreSettings", "CoreSettingsParser"]

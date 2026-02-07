@@ -1,0 +1,24 @@
+{
+    "settings": {
+        "acronym_scheme": "two_letter_limit",
+        "source_root": ""
+    },
+    "projects": {
+        "baklava": {
+            "words": ["baklava"],
+            "acronyms": []
+        },
+        "fileio": {
+            "words": ["file", "io"],
+            "acronyms": ["io"]
+        },
+        "fibonacci": {
+            "words": ["fibonacci"],
+            "acronyms": []
+        },
+        "helloworld": {
+            "words": ["hello", "world"],
+            "acronyms": []
+        }
+    }
+}
