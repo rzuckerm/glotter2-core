@@ -9,7 +9,7 @@ import pytest
 @pytest.fixture
 def tmp_dir() -> Generator[str, None, None]:
     with tempfile.TemporaryDirectory() as dir_:
-        yield str(Path(dir_).absolute())
+        yield str(Path(dir_).resolve())
 
 
 @pytest.fixture

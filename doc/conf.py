@@ -2,7 +2,7 @@ import sys
 from pathlib import Path
 
 # Ensure the project's `src` directory is on sys.path so Sphinx can import packages
-ROOT = str(Path(__file__).parent.parent.absolute())
+ROOT = str(Path(__file__).parent.parent.resolve())
 SYS_SRC = str(Path(ROOT) / "src")
 if SYS_SRC not in sys.path:
     sys.path.insert(0, SYS_SRC)

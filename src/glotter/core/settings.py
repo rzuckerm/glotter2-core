@@ -49,7 +49,7 @@ class CoreSettings:
             raise ValueError(f'Unknown acronym scheme: "{acronym_scheme}"')
 
         source_root = settings_item.get("source_root") or self.project_root
-        object.__setattr__(self, "source_root", str(Path(source_root).absolute()))
+        object.__setattr__(self, "source_root", str(Path(source_root).resolve()))
 
     def _set_projects(self, projects_item: Any) -> None:
         if not isinstance(projects_item, dict):
@@ -108,7 +108,7 @@ class CoreSettingsParser:
     def _locate_yml(self) -> str | None:
         for root, _, files in os.walk(self.project_root):
             if ".glotter.yml" in files:
-                return str((Path(root) / ".glotter.yml").absolute())
+                return str((Path(root) / ".glotter.yml").resolve())
 
         return None
 
