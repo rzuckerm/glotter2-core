@@ -48,7 +48,7 @@ class CoreSource:
     @property
     def extension(self) -> str:
         """Returns the extension of the source"""
-        return ".".join(["", *self.filename.split(".")[1:]])
+        return "".join(Path(self.filename).suffixes)
 
 
 def get_sources_by_project(
