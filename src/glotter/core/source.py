@@ -70,6 +70,7 @@ def get_sources_by_project(
         key contains a list of invalid paths relative to the specified path
     """
     sources = {k: [] for k in projects}
+    orig_path = Path(path).resolve()
     if check_bad_sources:
         sources[BAD_SOURCES] = []
 
@@ -91,7 +92,7 @@ def get_sources_by_project(
                     set(folder_project_names.values()) | {"testinfo.yml", "README.md"}
                 )
                 sources[BAD_SOURCES] += [
-                    str(Path(path).relative_to(current_path) / filename)
+                    str(current_path.relative_to(orig_path) / filename)
                     for filename in invalid_filenames
                 ]
 
