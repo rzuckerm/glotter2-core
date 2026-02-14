@@ -2,8 +2,8 @@
 
 from __future__ import annotations
 
-from dataclasses import dataclass
-from typing import Optional
+from dataclasses import dataclass, field
+from typing import Any, Optional
 
 import yaml
 from jinja2 import BaseLoader, Environment
@@ -21,24 +21,27 @@ class ContainerInfo:
     :ivar build: an optional command to run to build the source before running the command
     """
 
-    image: str
-    tag: str
-    cmd: str
+    image: str = ""
+    tag: str = ""
+    cmd: str = ""
     build: Optional[str] = None
 
     @classmethod
-    def from_dict(cls, dictionary: dict[str, str]) -> ContainerInfo:
+    def from_dict(cls, dictionary: dict[str, Optional[str]]) -> ContainerInfo:
         """
-        Create a ContainerInfo from a dictionary
+        Create a ContainerInfo object from a dictionary
 
         :param dictionary: the dictionary representing ContainerInfo
-        :return: a new ContainerInfo
+        :return: a new ContainerInfo object
         """
-        image = dictionary["image"]
-        tag = dictionary["tag"]
-        cmd = dictionary["cmd"]
-        build = dictionary["build"] if "build" in dictionary else None
+        image = dictionary.get("image", "")
+        tag = dictionary.get("tag", "")
+        cmd = dictionary.get("cmd", "")
+        build = dictionary.get("build")
         return ContainerInfo(image=image, tag=tag, cmd=cmd, build=build)
+
+    def __bool__(self) -> bool:
+        return bool(self.image and self.tag and self.cmd)
 
 
 @dataclass(frozen=True)
@@ -97,24 +100,40 @@ class TestInfo:
 
     :param container_info: ContainerInfo object
     :param file_info: FolderInfo object
+    :param language_display_name: string indicating the display name of the
+        language
+    :param notes: a list of notes about the language
+
+    :ivar container_info: ContainerInfo object
+    :ivar file_info: FolderInfo object
+    :ivar language_display_name: string indicating the display name of the
+        language
     """
 
     container_info: ContainerInfo
     file_info: FolderInfo
+    language_display_name: str
+    notes: list[str] = field(default_factory=list)
 
     __test__ = False  # Indicate this is not a test
 
     @classmethod
-    def from_dict(cls, dictionary: dict[str, str]) -> TestInfo:
+    def from_dict(cls, dictionary: dict[str, Any], language: str) -> TestInfo:
         """
-        Create a TestInfo from a dictionary
+        Create a TestInfo object from a dictionary
 
-        :param dictionary: the dictionary representing TestInfo
-        :return: a new TestInfo
+        :param dictionary: the dictionary representing a TestInfo object
+        :param language: language of source object
+        :return: a new TestInfo object
         """
+        language_display_name = dictionary.get(
+            "language_display_name", _get_language_display_name(language)
+        )
         return TestInfo(
-            container_info=ContainerInfo.from_dict(dictionary["container"]),
+            container_info=ContainerInfo.from_dict(dictionary.get("container", {})),
             file_info=FolderInfo.from_dict(dictionary["folder"]),
+            language_display_name=language_display_name,
+            notes=dictionary.get("notes", []),
         )
 
     @classmethod
@@ -125,12 +144,35 @@ class TestInfo:
 
         :param string: contents of a testinfo file
         :param source: a source object to use for jinja2 template parsing
+        :param language: language of source
         :return: a new TestInfo
         """
         template = Environment(loader=BaseLoader).from_string(string)
         template_string = template.render(source=source)
         info_yaml = yaml.safe_load(template_string)
-        return cls.from_dict(info_yaml)
+        return cls.from_dict(info_yaml, source.language)
+
+    @property
+    def is_testable(self) -> bool:
+        """
+        Indicate if language is testable
+
+        :return: True if language is testable, False otherwise
+        """
+
+        return bool(self.container_info)
+
+
+LANGUAGE_TEXT_TO_SYMBOL = {"plus": "+", "sharp": "#", "star": "*"}
+
+
+def _get_language_display_name(language: str) -> str:
+    tokens = [LANGUAGE_TEXT_TO_SYMBOL.get(token, token) for token in language.split("-")]
+    separator = " "
+    if any(token in LANGUAGE_TEXT_TO_SYMBOL.values() for token in tokens):
+        separator = ""
+
+    return separator.join(tokens).title()
 
 
 __all__ = ["ContainerInfo", "FolderInfo", "TestInfo"]

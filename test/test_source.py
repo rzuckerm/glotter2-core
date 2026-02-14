@@ -22,15 +22,15 @@ container:
 """
 FOLDER_INFO_NO_BUILD = FolderInfo(extension=EXTENSION_NO_BUILD, naming=NAMING_NO_BUILD)
 CONTAINER_INFO_NO_BUILD = ContainerInfo(image=IMAGE_NO_BUILD, tag=TAG_NO_BUILD, cmd=CMD_NO_BUILD)
-TEST_INFO_NO_BUILD = TestInfo(
-    container_info=CONTAINER_INFO_NO_BUILD, file_info=FOLDER_INFO_NO_BUILD
-)
 
 EXPECTED_CONTAINER_INFO_NO_BUILD = ContainerInfo(
     image=IMAGE_NO_BUILD, tag=TAG_NO_BUILD, cmd="python hello_world.py"
 )
 EXPECTED_TEST_INFO_NO_BUILD = TestInfo(
-    container_info=EXPECTED_CONTAINER_INFO_NO_BUILD, file_info=FOLDER_INFO_NO_BUILD
+    container_info=EXPECTED_CONTAINER_INFO_NO_BUILD,
+    file_info=FOLDER_INFO_NO_BUILD,
+    language_display_name="Python",
+    notes=[],
 )
 
 EXTENSION_BUILD = ".go"
@@ -57,7 +57,6 @@ CONTAINER_INFO_BUILD = ContainerInfo(
     build=BUILD_BUILD,
     cmd=CMD_BUILD,
 )
-TEST_INFO_BUILD = TestInfo(container_info=CONTAINER_INFO_BUILD, file_info=FOLDER_INFO_BUILD)
 
 EXPECTED_CONTAINER_INFO_BUILD = ContainerInfo(
     image=IMAGE_BUILD,
@@ -66,7 +65,10 @@ EXPECTED_CONTAINER_INFO_BUILD = ContainerInfo(
     cmd="./hello-world",
 )
 EXPECTED_TEST_INFO_BUILD = TestInfo(
-    container_info=EXPECTED_CONTAINER_INFO_BUILD, file_info=FOLDER_INFO_BUILD
+    container_info=EXPECTED_CONTAINER_INFO_BUILD,
+    file_info=FOLDER_INFO_BUILD,
+    language_display_name="Go",
+    notes=[],
 )
 
 
