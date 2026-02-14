@@ -74,8 +74,8 @@
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
-<span class="kn">from</span><span class="w"> </span><span class="nn">dataclasses</span><span class="w"> </span><span class="kn">import</span> <span class="n">dataclass</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Optional</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">dataclasses</span><span class="w"> </span><span class="kn">import</span> <span class="n">dataclass</span><span class="p">,</span> <span class="n">field</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Optional</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">yaml</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">jinja2</span><span class="w"> </span><span class="kn">import</span> <span class="n">BaseLoader</span><span class="p">,</span> <span class="n">Environment</span>
@@ -95,27 +95,30 @@
 <span class="sd">    :ivar build: an optional command to run to build the source before running the command</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="n">image</span><span class="p">:</span> <span class="nb">str</span>
-    <span class="n">tag</span><span class="p">:</span> <span class="nb">str</span>
-    <span class="n">cmd</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">image</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+    <span class="n">tag</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+    <span class="n">cmd</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
     <span class="n">build</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
 
 <div class="viewcode-block" id="ContainerInfo.from_dict">
 <a class="viewcode-back" href="../../../api.html#glotter.core.testinfo.ContainerInfo.from_dict">[docs]</a>
     <span class="nd">@classmethod</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">from_dict</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">dictionary</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">ContainerInfo</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">from_dict</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">dictionary</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="n">ContainerInfo</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Create a ContainerInfo from a dictionary</span>
+<span class="sd">        Create a ContainerInfo object from a dictionary</span>
 
 <span class="sd">        :param dictionary: the dictionary representing ContainerInfo</span>
-<span class="sd">        :return: a new ContainerInfo</span>
+<span class="sd">        :return: a new ContainerInfo object</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">image</span> <span class="o">=</span> <span class="n">dictionary</span><span class="p">[</span><span class="s2">&quot;image&quot;</span><span class="p">]</span>
-        <span class="n">tag</span> <span class="o">=</span> <span class="n">dictionary</span><span class="p">[</span><span class="s2">&quot;tag&quot;</span><span class="p">]</span>
-        <span class="n">cmd</span> <span class="o">=</span> <span class="n">dictionary</span><span class="p">[</span><span class="s2">&quot;cmd&quot;</span><span class="p">]</span>
-        <span class="n">build</span> <span class="o">=</span> <span class="n">dictionary</span><span class="p">[</span><span class="s2">&quot;build&quot;</span><span class="p">]</span> <span class="k">if</span> <span class="s2">&quot;build&quot;</span> <span class="ow">in</span> <span class="n">dictionary</span> <span class="k">else</span> <span class="kc">None</span>
+        <span class="n">image</span> <span class="o">=</span> <span class="n">dictionary</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;image&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+        <span class="n">tag</span> <span class="o">=</span> <span class="n">dictionary</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;tag&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+        <span class="n">cmd</span> <span class="o">=</span> <span class="n">dictionary</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;cmd&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+        <span class="n">build</span> <span class="o">=</span> <span class="n">dictionary</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;build&quot;</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">ContainerInfo</span><span class="p">(</span><span class="n">image</span><span class="o">=</span><span class="n">image</span><span class="p">,</span> <span class="n">tag</span><span class="o">=</span><span class="n">tag</span><span class="p">,</span> <span class="n">cmd</span><span class="o">=</span><span class="n">cmd</span><span class="p">,</span> <span class="n">build</span><span class="o">=</span><span class="n">build</span><span class="p">)</span></div>
-</div>
+
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__bool__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="k">return</span> <span class="nb">bool</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">image</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">tag</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">cmd</span><span class="p">)</span></div>
 
 
 
@@ -186,26 +189,42 @@
 
 <span class="sd">    :param container_info: ContainerInfo object</span>
 <span class="sd">    :param file_info: FolderInfo object</span>
+<span class="sd">    :param language_display_name: string indicating the display name of the</span>
+<span class="sd">        language</span>
+<span class="sd">    :param notes: a list of notes about the language</span>
+
+<span class="sd">    :ivar container_info: ContainerInfo object</span>
+<span class="sd">    :ivar file_info: FolderInfo object</span>
+<span class="sd">    :ivar language_display_name: string indicating the display name of the</span>
+<span class="sd">        language</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">container_info</span><span class="p">:</span> <span class="n">ContainerInfo</span>
     <span class="n">file_info</span><span class="p">:</span> <span class="n">FolderInfo</span>
+    <span class="n">language_display_name</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">notes</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="nb">list</span><span class="p">)</span>
 
     <span class="n">__test__</span> <span class="o">=</span> <span class="kc">False</span>  <span class="c1"># Indicate this is not a test</span>
 
 <div class="viewcode-block" id="TestInfo.from_dict">
 <a class="viewcode-back" href="../../../api.html#glotter.core.testinfo.TestInfo.from_dict">[docs]</a>
     <span class="nd">@classmethod</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">from_dict</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">dictionary</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">TestInfo</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">from_dict</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">dictionary</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span> <span class="n">language</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">TestInfo</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Create a TestInfo from a dictionary</span>
+<span class="sd">        Create a TestInfo object from a dictionary</span>
 
-<span class="sd">        :param dictionary: the dictionary representing TestInfo</span>
-<span class="sd">        :return: a new TestInfo</span>
+<span class="sd">        :param dictionary: the dictionary representing a TestInfo object</span>
+<span class="sd">        :param language: language of source object</span>
+<span class="sd">        :return: a new TestInfo object</span>
 <span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">language_display_name</span> <span class="o">=</span> <span class="n">dictionary</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+            <span class="s2">&quot;language_display_name&quot;</span><span class="p">,</span> <span class="n">_get_language_display_name</span><span class="p">(</span><span class="n">language</span><span class="p">)</span>
+        <span class="p">)</span>
         <span class="k">return</span> <span class="n">TestInfo</span><span class="p">(</span>
-            <span class="n">container_info</span><span class="o">=</span><span class="n">ContainerInfo</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="s2">&quot;container&quot;</span><span class="p">]),</span>
+            <span class="n">container_info</span><span class="o">=</span><span class="n">ContainerInfo</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">dictionary</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;container&quot;</span><span class="p">,</span> <span class="p">{})),</span>
             <span class="n">file_info</span><span class="o">=</span><span class="n">FolderInfo</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="s2">&quot;folder&quot;</span><span class="p">]),</span>
+            <span class="n">language_display_name</span><span class="o">=</span><span class="n">language_display_name</span><span class="p">,</span>
+            <span class="n">notes</span><span class="o">=</span><span class="n">dictionary</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;notes&quot;</span><span class="p">,</span> <span class="p">[]),</span>
         <span class="p">)</span></div>
 
 
@@ -219,14 +238,37 @@
 
 <span class="sd">        :param string: contents of a testinfo file</span>
 <span class="sd">        :param source: a source object to use for jinja2 template parsing</span>
+<span class="sd">        :param language: language of source</span>
 <span class="sd">        :return: a new TestInfo</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">template</span> <span class="o">=</span> <span class="n">Environment</span><span class="p">(</span><span class="n">loader</span><span class="o">=</span><span class="n">BaseLoader</span><span class="p">)</span><span class="o">.</span><span class="n">from_string</span><span class="p">(</span><span class="n">string</span><span class="p">)</span>
         <span class="n">template_string</span> <span class="o">=</span> <span class="n">template</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="n">source</span><span class="o">=</span><span class="n">source</span><span class="p">)</span>
         <span class="n">info_yaml</span> <span class="o">=</span> <span class="n">yaml</span><span class="o">.</span><span class="n">safe_load</span><span class="p">(</span><span class="n">template_string</span><span class="p">)</span>
-        <span class="k">return</span> <span class="bp">cls</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">info_yaml</span><span class="p">)</span></div>
-</div>
+        <span class="k">return</span> <span class="bp">cls</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">info_yaml</span><span class="p">,</span> <span class="n">source</span><span class="o">.</span><span class="n">language</span><span class="p">)</span></div>
 
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">is_testable</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Indicate if language is testable</span>
+
+<span class="sd">        :return: True if language is testable, False otherwise</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">return</span> <span class="nb">bool</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">container_info</span><span class="p">)</span></div>
+
+
+
+<span class="n">LANGUAGE_TEXT_TO_SYMBOL</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;plus&quot;</span><span class="p">:</span> <span class="s2">&quot;+&quot;</span><span class="p">,</span> <span class="s2">&quot;sharp&quot;</span><span class="p">:</span> <span class="s2">&quot;#&quot;</span><span class="p">,</span> <span class="s2">&quot;star&quot;</span><span class="p">:</span> <span class="s2">&quot;*&quot;</span><span class="p">}</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_get_language_display_name</span><span class="p">(</span><span class="n">language</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="n">tokens</span> <span class="o">=</span> <span class="p">[</span><span class="n">LANGUAGE_TEXT_TO_SYMBOL</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="n">token</span><span class="p">)</span> <span class="k">for</span> <span class="n">token</span> <span class="ow">in</span> <span class="n">language</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;-&quot;</span><span class="p">)]</span>
+    <span class="n">separator</span> <span class="o">=</span> <span class="s2">&quot; &quot;</span>
+    <span class="k">if</span> <span class="nb">any</span><span class="p">(</span><span class="n">token</span> <span class="ow">in</span> <span class="n">LANGUAGE_TEXT_TO_SYMBOL</span><span class="o">.</span><span class="n">values</span><span class="p">()</span> <span class="k">for</span> <span class="n">token</span> <span class="ow">in</span> <span class="n">tokens</span><span class="p">):</span>
+        <span class="n">separator</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+
+    <span class="k">return</span> <span class="n">separator</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">tokens</span><span class="p">)</span><span class="o">.</span><span class="n">title</span><span class="p">()</span>
 
 
 <span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;ContainerInfo&quot;</span><span class="p">,</span> <span class="s2">&quot;FolderInfo&quot;</span><span class="p">,</span> <span class="s2">&quot;TestInfo&quot;</span><span class="p">]</span>

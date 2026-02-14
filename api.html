@@ -71,6 +71,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#glotter.core.testinfo.TestInfo"><code class="docutils literal notranslate"><span class="pre">TestInfo</span></code></a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#glotter.core.testinfo.TestInfo.from_dict"><code class="docutils literal notranslate"><span class="pre">TestInfo.from_dict()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#glotter.core.testinfo.TestInfo.from_string"><code class="docutils literal notranslate"><span class="pre">TestInfo.from_string()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#glotter.core.testinfo.TestInfo.is_testable"><code class="docutils literal notranslate"><span class="pre">TestInfo.is_testable</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -246,7 +247,7 @@ the project words, and the project acronyms</p>
 <p>Container, folder, and test information</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="glotter.core.testinfo.ContainerInfo">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">glotter.core.testinfo.</span></span><span class="sig-name descname"><span class="pre">ContainerInfo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tag</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cmd</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">build</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/glotter/core/testinfo.html#ContainerInfo"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#glotter.core.testinfo.ContainerInfo" title="Link to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">glotter.core.testinfo.</span></span><span class="sig-name descname"><span class="pre">ContainerInfo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tag</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cmd</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">build</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/glotter/core/testinfo.html#ContainerInfo"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#glotter.core.testinfo.ContainerInfo" title="Link to this definition"></a></dt>
 <dd><p>Configuration for a container to run for a directory</p>
 <dl class="field-list simple">
 <dt class="field-odd">Variables<span class="colon">:</span></dt>
@@ -260,14 +261,14 @@ the project words, and the project acronyms</p>
 </dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="glotter.core.testinfo.ContainerInfo.from_dict">
-<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dictionary</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#glotter.core.testinfo.ContainerInfo" title="glotter.core.testinfo.ContainerInfo"><span class="pre">ContainerInfo</span></a></span></span><a class="reference internal" href="_modules/glotter/core/testinfo.html#ContainerInfo.from_dict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#glotter.core.testinfo.ContainerInfo.from_dict" title="Link to this definition"></a></dt>
-<dd><p>Create a ContainerInfo from a dictionary</p>
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dictionary</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#glotter.core.testinfo.ContainerInfo" title="glotter.core.testinfo.ContainerInfo"><span class="pre">ContainerInfo</span></a></span></span><a class="reference internal" href="_modules/glotter/core/testinfo.html#ContainerInfo.from_dict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#glotter.core.testinfo.ContainerInfo.from_dict" title="Link to this definition"></a></dt>
+<dd><p>Create a ContainerInfo object from a dictionary</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>dictionary</strong> – the dictionary representing ContainerInfo</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>a new ContainerInfo</p>
+<dd class="field-even"><p>a new ContainerInfo object</p>
 </dd>
 </dl>
 </dd></dl>
@@ -332,26 +333,40 @@ information about the project</p></li>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="glotter.core.testinfo.TestInfo">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">glotter.core.testinfo.</span></span><span class="sig-name descname"><span class="pre">TestInfo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">container_info</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#glotter.core.testinfo.ContainerInfo" title="glotter.core.testinfo.ContainerInfo"><span class="pre">ContainerInfo</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">file_info</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#glotter.core.testinfo.FolderInfo" title="glotter.core.testinfo.FolderInfo"><span class="pre">FolderInfo</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/glotter/core/testinfo.html#TestInfo"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#glotter.core.testinfo.TestInfo" title="Link to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">glotter.core.testinfo.</span></span><span class="sig-name descname"><span class="pre">TestInfo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">container_info:</span> <span class="pre">~glotter.core.testinfo.ContainerInfo</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file_info:</span> <span class="pre">~glotter.core.testinfo.FolderInfo</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">language_display_name:</span> <span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">notes:</span> <span class="pre">list[str]</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/glotter/core/testinfo.html#TestInfo"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#glotter.core.testinfo.TestInfo" title="Link to this definition"></a></dt>
 <dd><p>An object representation of a testinfo file</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>container_info</strong> – ContainerInfo object</p></li>
 <li><p><strong>file_info</strong> – FolderInfo object</p></li>
+<li><p><strong>language_display_name</strong> – string indicating the display name of the
+language</p></li>
+<li><p><strong>notes</strong> – a list of notes about the language</p></li>
+</ul>
+</dd>
+<dt class="field-even">Variables<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>container_info</strong> – ContainerInfo object</p></li>
+<li><p><strong>file_info</strong> – FolderInfo object</p></li>
+<li><p><strong>language_display_name</strong> – string indicating the display name of the
+language</p></li>
 </ul>
 </dd>
 </dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="glotter.core.testinfo.TestInfo.from_dict">
-<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dictionary</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#glotter.core.testinfo.TestInfo" title="glotter.core.testinfo.TestInfo"><span class="pre">TestInfo</span></a></span></span><a class="reference internal" href="_modules/glotter/core/testinfo.html#TestInfo.from_dict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#glotter.core.testinfo.TestInfo.from_dict" title="Link to this definition"></a></dt>
-<dd><p>Create a TestInfo from a dictionary</p>
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dictionary</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">language</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#glotter.core.testinfo.TestInfo" title="glotter.core.testinfo.TestInfo"><span class="pre">TestInfo</span></a></span></span><a class="reference internal" href="_modules/glotter/core/testinfo.html#TestInfo.from_dict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#glotter.core.testinfo.TestInfo.from_dict" title="Link to this definition"></a></dt>
+<dd><p>Create a TestInfo object from a dictionary</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>dictionary</strong> – the dictionary representing TestInfo</p>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dictionary</strong> – the dictionary representing a TestInfo object</p></li>
+<li><p><strong>language</strong> – language of source object</p></li>
+</ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>a new TestInfo</p>
+<dd class="field-even"><p>a new TestInfo object</p>
 </dd>
 </dl>
 </dd></dl>
@@ -366,10 +381,22 @@ Then parse it as yaml</p>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>string</strong> – contents of a testinfo file</p></li>
 <li><p><strong>source</strong> – a source object to use for jinja2 template parsing</p></li>
+<li><p><strong>language</strong> – language of source</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>a new TestInfo</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="glotter.core.testinfo.TestInfo.is_testable">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">is_testable</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></em><a class="headerlink" href="#glotter.core.testinfo.TestInfo.is_testable" title="Link to this definition"></a></dt>
+<dd><p>Indicate if language is testable</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>True if language is testable, False otherwise</p>
 </dd>
 </dl>
 </dd></dl>
