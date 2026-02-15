@@ -1,0 +1,5 @@
+(*
+Source:
+https://github.com/TheRenegadeCoder/sample-programs/blob/main/archive/m/mathematica/hello-world.nb
+*)
+Print["Hello, World!"];

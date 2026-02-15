@@ -1,0 +1,11 @@
+settings:
+    source_root: "test/data/sample-programs-repo/archive"
+
+projects:
+    helloworld:
+        words:
+            - "hello"
+            - "world"
+    rot13:
+        words:
+            - "rot13"
