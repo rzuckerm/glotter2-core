@@ -78,7 +78,7 @@
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">yaml</span>
 
-<span class="kn">from</span><span class="w"> </span><span class="nn">glotter.core.project</span><span class="w"> </span><span class="kn">import</span> <span class="n">CoreProject</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">glotter.core.project</span><span class="w"> </span><span class="kn">import</span> <span class="n">CoreProjectMixin</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">glotter.core.testinfo</span><span class="w"> </span><span class="kn">import</span> <span class="n">TestInfo</span>
 
 
@@ -153,14 +153,14 @@
 <div class="viewcode-block" id="categorize_sources">
 <a class="viewcode-back" href="../../../api.html#glotter.core.source.categorize_sources">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">categorize_sources</span><span class="p">(</span>
-    <span class="n">path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">projects</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">CoreProject</span><span class="p">],</span> <span class="n">source_cls</span><span class="p">:</span> <span class="nb">type</span>
+    <span class="n">path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">projects</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">CoreProjectMixin</span><span class="p">],</span> <span class="n">source_cls</span><span class="p">:</span> <span class="nb">type</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CoreSourceCategories</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Categorize sources</span>
 
 <span class="sd">    :param path: path to source directory</span>
 <span class="sd">    :param projects: dictionary whose key is a project type and whose value is a</span>
-<span class="sd">        CoreProject object</span>
+<span class="sd">        CoreProjectMixin object</span>
 <span class="sd">    :param source_cls: source object class</span>
 <span class="sd">    :return: CoreSourceCategories object containing information of the source</span>
 <span class="sd">        categories</span>
