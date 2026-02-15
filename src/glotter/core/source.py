@@ -6,7 +6,7 @@ from pathlib import Path
 
 import yaml
 
-from glotter.core.project import CoreProject
+from glotter.core.project import CoreProjectMixin
 from glotter.core.testinfo import TestInfo
 
 
@@ -73,14 +73,14 @@ _IGNORED_FILENAMES = {"untestable.yml", "testinfo.yml", "README.md"}
 
 
 def categorize_sources(
-    path: str, projects: dict[str, CoreProject], source_cls: type
+    path: str, projects: dict[str, CoreProjectMixin], source_cls: type
 ) -> CoreSourceCategories:
     """
     Categorize sources
 
     :param path: path to source directory
     :param projects: dictionary whose key is a project type and whose value is a
-        CoreProject object
+        CoreProjectMixin object
     :param source_cls: source object class
     :return: CoreSourceCategories object containing information of the source
         categories
