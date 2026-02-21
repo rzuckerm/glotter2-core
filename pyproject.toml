@@ -10,7 +10,7 @@ authors = [
 requires-python = ">=3.9,<4.0"
 license = {text = "LICENSE.txt"}
 classifiers = [
-    "Development Status :: 1 - Planning",
+    "Development Status :: 3 - Alpha",
     "License :: OSI Approved :: MIT License",
     "Operating System :: OS Independent",
     "Programming Language :: Python :: 3",
