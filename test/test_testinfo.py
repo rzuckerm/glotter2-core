@@ -3,8 +3,8 @@ from uuid import uuid4 as uuid
 
 import pytest
 
-from glotter.core.project import CoreProject
-from glotter.core.testinfo import ContainerInfo, FolderInfo, TestInfo
+from glotter_core.project import CoreProject
+from glotter_core.testinfo import ContainerInfo, FolderInfo, TestInfo
 
 
 @pytest.mark.parametrize("build", [uuid().hex, None], ids=["with_build", "without_build"])

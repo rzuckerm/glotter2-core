@@ -1,6 +1,6 @@
 import pytest
 
-from glotter.core.project import AcronymScheme, CoreProject, NamingScheme
+from glotter_core.project import AcronymScheme, CoreProject, NamingScheme
 
 project_scheme_permutation_map = [
     {

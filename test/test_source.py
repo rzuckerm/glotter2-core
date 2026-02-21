@@ -3,9 +3,9 @@ from pathlib import Path
 import pytest
 import yaml
 
-from glotter.core.settings import CoreSettings
-from glotter.core.source import CoreSource, CoreSourceCategories, categorize_sources
-from glotter.core.testinfo import ContainerInfo, FolderInfo, TestInfo
+from glotter_core.settings import CoreSettings
+from glotter_core.source import CoreSource, CoreSourceCategories, categorize_sources
+from glotter_core.testinfo import ContainerInfo, FolderInfo, TestInfo
 
 EXTENSION_NO_BUILD = ".py"
 NAMING_NO_BUILD = "underscore"

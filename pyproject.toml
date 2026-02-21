@@ -42,7 +42,7 @@ requires = ["uv_build>=0.10.0,<0.11.0"]
 build-backend = "uv_build"
 
 [tool.uv.build-backend]
-module-name = "glotter.core"
+module-name = "glotter_core"
 
 [tool.ruff]
 target-version = "py39"

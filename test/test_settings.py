@@ -6,8 +6,8 @@ from typing import Any
 import pytest
 import yaml
 
-from glotter.core.project import AcronymScheme, CoreProject
-from glotter.core.settings import CoreSettings, CoreSettingsParser
+from glotter_core.project import AcronymScheme, CoreProject
+from glotter_core.settings import CoreSettings, CoreSettingsParser
 
 TEST_DATA_DIR = Path("test/data").resolve()
 

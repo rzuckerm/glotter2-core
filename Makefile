@@ -1,4 +1,4 @@
-PACKAGE := src/glotter/core
+PACKAGE := src/glotter_core
 TESTS := test
 CONFIG_FILE = pyproject.toml
 ALL = $(PACKAGE) $(TESTS) doc
