@@ -1,41 +1,41 @@
 API
 ===
 
-glotter.core.project
+glotter_core.project
 --------------------
 
 Enumerations
 ~~~~~~~~~~~~
 
-.. autoclass:: glotter.core.project.AcronymScheme
+.. autoclass:: glotter_core.project.AcronymScheme
    :members:
 
-.. autoclass:: glotter.core.project.NamingScheme
+.. autoclass:: glotter_core.project.NamingScheme
    :members:
 
 Classes
 ~~~~~~~
 
-.. autoclass:: glotter.core.project.CoreProject
+.. autoclass:: glotter_core.project.CoreProject
    :members:
 
-.. autoclass:: glotter.core.project.CoreProjectMixin
+.. autoclass:: glotter_core.project.CoreProjectMixin
    :members:
 
-glotter.core.testinfo
+glotter_core.testinfo
 ---------------------
 
-.. automodule:: glotter.core.testinfo
+.. automodule:: glotter_core.testinfo
    :members:
 
-glotter.core.source
+glotter_core.source
 -------------------
 
-.. automodule:: glotter.core.source
+.. automodule:: glotter_core.source
    :members:
 
-glotter.core.settings
+glotter_core.settings
 ---------------------
 
-.. automodule:: glotter.core.settings
+.. automodule:: glotter_core.settings
    :members:
