@@ -137,7 +137,7 @@ def _convert_untestable_to_testinfo(
         base_filename = filename.split(".")[0]
         extension = "".join(Path(base_filename).suffixes)
         project_type = base_filename.lower().replace("-", "").replace("_", "")
-        if project_type in projects:
+        if project_type in projects and len(projects[project_type].words) > 1:
             for naming_scheme in NamingScheme:
                 expected_filename = (
                     projects[project_type].get_project_name_by_scheme(naming_scheme) + extension
