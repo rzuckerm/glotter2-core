@@ -6,7 +6,7 @@ from pathlib import Path
 
 import yaml
 
-from glotter_core.project import CoreProjectMixin
+from glotter_core.project import CoreProjectMixin, NamingScheme
 from glotter_core.testinfo import TestInfo
 
 
@@ -91,8 +91,13 @@ def categorize_sources(
     orig_path = Path(path).resolve()
     for root, _, files in os.walk(path):
         current_path = Path(root).resolve()
+        test_info_string = ""
         if "testinfo.yml" in files:
             test_info_string = Path(current_path, "testinfo.yml").read_text(encoding="utf-8")
+        elif "untestable.yml" in files:
+            test_info_string = _convert_untestable_to_testinfo(current_path, files, projects)
+
+        if test_info_string:
             language = current_path.name
             test_info = TestInfo.from_dict(yaml.safe_load(test_info_string), language)
             categories.test_info[language] = test_info
@@ -116,6 +121,38 @@ def categorize_sources(
             ]
 
     return categories
+
+
+def _convert_untestable_to_testinfo(
+    current_path: Path, files: list[str], projects: dict[str, CoreProjectMixin]
+) -> str:
+    with Path(current_path, "untestable.yml").open(encoding="utf-8") as f:
+        untestable_data = yaml.safe_load(f)
+
+    notes = untestable_data[0]["notes"]
+    for filename in files:
+        if filename in _IGNORED_FILENAMES:
+            continue
+
+        base_filename = filename.split(".")[0]
+        extension = "".join(Path(base_filename).suffixes)
+        project_type = base_filename.lower().replace("-", "").replace("_", "")
+        if project_type in projects:
+            for naming_scheme in NamingScheme:
+                expected_filename = (
+                    projects[project_type].get_project_name_by_scheme(naming_scheme) + extension
+                )
+                if filename == expected_filename:
+                    test_info_dict = {
+                        "folder": {
+                            "extension": extension,
+                            "naming_scheme": naming_scheme.value,
+                        },
+                        "notes": [notes],
+                    }
+                    return yaml.dump(test_info_dict, sort_keys=False)
+
+    return ""
 
 
 __all__ = ["CoreSource", "CoreSourceCategories", "categorize_sources"]
