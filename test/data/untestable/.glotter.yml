@@ -1,5 +1,5 @@
 settings:
-    source_root: "test/data/untestable/archive"
+    source_root: "archive"
 
 projects:
     helloworld:

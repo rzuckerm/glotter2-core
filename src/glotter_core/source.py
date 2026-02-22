@@ -129,13 +129,13 @@ def _convert_untestable_to_testinfo(
     with Path(current_path, "untestable.yml").open(encoding="utf-8") as f:
         untestable_data = yaml.safe_load(f)
 
-    notes = untestable_data[0]["notes"]
+    notes = untestable_data[0]["reason"]
     for filename in files:
         if filename in _IGNORED_FILENAMES:
             continue
 
         base_filename = filename.split(".")[0]
-        extension = "".join(Path(base_filename).suffixes)
+        extension = "".join(Path(filename).suffixes)
         project_type = base_filename.lower().replace("-", "").replace("_", "")
         if project_type in projects and len(projects[project_type].words) > 1:
             for naming_scheme in NamingScheme:
@@ -146,7 +146,7 @@ def _convert_untestable_to_testinfo(
                     test_info_dict = {
                         "folder": {
                             "extension": extension,
-                            "naming_scheme": naming_scheme.value,
+                            "naming": naming_scheme.value,
                         },
                         "notes": [notes],
                     }

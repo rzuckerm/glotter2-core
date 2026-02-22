@@ -1,4 +1,7 @@
+import os
+from contextlib import contextmanager
 from pathlib import Path
+from typing import Generator
 
 import pytest
 import yaml
@@ -126,7 +129,9 @@ def test_test_info_matches_test_info_string(
 
 
 def test_categorize_sources():
-    settings = CoreSettings()
+    with cd("test/data/sample-programs-repo"):
+        settings = CoreSettings()
+
     categories = categorize_sources(settings.source_root, settings.projects, CoreSource)
 
     expected_categories = CoreSourceCategories()
@@ -200,6 +205,118 @@ def test_categorize_sources():
     assert set(categories.bad_sources) == set(expected_categories.bad_sources)
 
 
+def test_categorize_sources_untestable():
+    with cd("test/data/untestable"):
+        settings = CoreSettings()
+
+    categories = categorize_sources(settings.source_root, settings.projects, CoreSource)
+
+    expected_categories = CoreSourceCategories()
+    untestable_info = {
+        "untestable-camel": {"extension": ".uc", "naming": "camel"},
+        "untestable-hyphen": {"extension": ".uh", "naming": "hyphen"},
+        "untestable-lower": {"extension": ".ul", "naming": "lower"},
+        "untestable-pascal": {"extension": ".up", "naming": "pascal"},
+        "untestable-underscore": {"extension": ".uu", "naming": "underscore"},
+    }
+    test_info_strs = {}
+    paths = {}
+    for language, folder_info in untestable_info.items():
+        paths[language] = Path(settings.source_root, language[0], language)
+        untestable_path = paths[language] / "untestable.yml"
+        untestable = yaml.safe_load(untestable_path.read_text(encoding="utf-8"))
+        test_info_dict = {"folder": folder_info, "notes": [untestable[0]["reason"]]}
+        test_info_strs[language] = yaml.safe_dump(test_info_dict)
+        expected_categories.test_info[language] = TestInfo.from_dict(test_info_dict, language)
+
+    expected_categories.testable_by_project = {
+        project_type: [] for project_type in settings.projects
+    }
+
+    expected_sources = {
+        "untestable-camel": {
+            "helloworld": CoreSource(
+                "helloWorld.uc",
+                "untestable-camel",
+                str(paths["untestable-camel"]),
+                test_info_strs["untestable-camel"],
+            ),
+            "rot13": CoreSource(
+                "rot13.uc",
+                "untestable-camel",
+                str(paths["untestable-camel"]),
+                test_info_strs["untestable-camel"],
+            )
+        },
+        "untestable-hyphen": {
+            "helloworld": CoreSource(
+                "hello-world.uh",
+                "untestable-hyphen",
+                str(paths["untestable-hyphen"]),
+                test_info_strs["untestable-hyphen"],
+            ),
+            "rot13": CoreSource(
+                "rot13.uh",
+                "untestable-hyphen",
+                str(paths["untestable-hyphen"]),
+                test_info_strs["untestable-hyphen"],
+            )
+        },
+        "untestable-lower": {
+            "helloworld": CoreSource(
+                "helloworld.ul",
+                "untestable-lower",
+                str(paths["untestable-lower"]),
+                test_info_strs["untestable-lower"],
+            ),
+            "rot13": CoreSource(
+                "rot13.ul",
+                "untestable-lower",
+                str(paths["untestable-lower"]),
+                test_info_strs["untestable-lower"],
+            )
+        },
+        "untestable-pascal": {
+            "helloworld": CoreSource(
+                "HelloWorld.up",
+                "untestable-pascal",
+                str(paths["untestable-pascal"]),
+                test_info_strs["untestable-pascal"],
+            ),
+            "rot13": CoreSource(
+                "Rot13.up",
+                "untestable-pascal",
+                str(paths["untestable-pascal"]),
+                test_info_strs["untestable-pascal"],
+            )
+        },
+        "untestable-underscore": {
+            "helloworld": CoreSource(
+                "hello_world.uu",
+                "untestable-underscore",
+                str(paths["untestable-underscore"]),
+                test_info_strs["untestable-underscore"],
+            ),
+            "rot13": CoreSource(
+                "rot13.uu",
+                "untestable-underscore",
+                str(paths["untestable-underscore"]),
+                test_info_strs["untestable-underscore"],
+            )
+        },
+    }
+    expected_categories.by_language = {
+        language: [source for source in project_sources.values()]
+        for language, project_sources in expected_sources.items()
+    }
+    _assert_categorized_sources_eq(categories.by_language, expected_categories.by_language)
+    _assert_categorized_sources_eq(
+        categories.testable_by_project, expected_categories.testable_by_project
+    )
+    assert categories.test_info == expected_categories.test_info
+    assert set(categories.bad_sources) == set(expected_categories.bad_sources)
+
+
 def _assert_categorized_sources_eq(
     categorized_sources1: dict[str, list[CoreSource]],
     categorized_sources2: dict[str, list[CoreSource]],
@@ -213,3 +330,13 @@ def _assert_sources_eq(sources1: CoreSource, sources2: CoreSource) -> bool:
     sources1 = sorted(sources1, key=lambda x: x.filename)
     sources2 = sorted(sources2, key=lambda x: x.filename)
     assert sources1 == sources2
+
+
+@contextmanager
+def cd(path: str) -> Generator[None, None, None]:
+    orig_cwd = os.getcwd()
+    try:
+        os.chdir(path)
+        yield
+    finally:
+        os.chdir(orig_cwd)
