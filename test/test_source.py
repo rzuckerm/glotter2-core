@@ -246,7 +246,7 @@ def test_categorize_sources_untestable():
                 "untestable-camel",
                 str(paths["untestable-camel"]),
                 test_info_strs["untestable-camel"],
-            )
+            ),
         },
         "untestable-hyphen": {
             "helloworld": CoreSource(
@@ -260,7 +260,7 @@ def test_categorize_sources_untestable():
                 "untestable-hyphen",
                 str(paths["untestable-hyphen"]),
                 test_info_strs["untestable-hyphen"],
-            )
+            ),
         },
         "untestable-lower": {
             "helloworld": CoreSource(
@@ -274,7 +274,7 @@ def test_categorize_sources_untestable():
                 "untestable-lower",
                 str(paths["untestable-lower"]),
                 test_info_strs["untestable-lower"],
-            )
+            ),
         },
         "untestable-pascal": {
             "helloworld": CoreSource(
@@ -288,7 +288,7 @@ def test_categorize_sources_untestable():
                 "untestable-pascal",
                 str(paths["untestable-pascal"]),
                 test_info_strs["untestable-pascal"],
-            )
+            ),
         },
         "untestable-underscore": {
             "helloworld": CoreSource(
@@ -302,7 +302,7 @@ def test_categorize_sources_untestable():
                 "untestable-underscore",
                 str(paths["untestable-underscore"]),
                 test_info_strs["untestable-underscore"],
-            )
+            ),
         },
     }
     expected_categories.by_language = {
