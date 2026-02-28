@@ -46,8 +46,8 @@ def test_folder_info_bad_naming_scheme():
 )
 def test_folder_info_get_project_mappings(include_extension, expected_extension):
     projects = {
-        "helloworld": CoreProject(words=["hello", "world"]),
-        "fibonacci": CoreProject(words=["fibonacci"]),
+        "helloworld": CoreProject({"words": ["hello", "world"]}),
+        "fibonacci": CoreProject({"words": ["fibonacci"]}),
     }
     folder_info = FolderInfo(extension=".py", naming="underscore")
 

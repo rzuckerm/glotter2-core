@@ -80,11 +80,8 @@ def test_settings_when_good_yml(filename_no_ext: str, tmp_dir_chdir: str):
     assert settings.source_root == str(Path(tmp_dir_chdir) / expected_settings["source_root"])
 
     expected_project_items = expected_data["projects"]
-    for project in expected_project_items.values():
-        project["acronym_scheme"] = expected_settings["acronym_scheme"]
-
     expected_projects = {
-        name: CoreProject(**project) for name, project in expected_project_items.items()
+        name: CoreProject(project) for name, project in expected_project_items.items()
     }
     assert settings.projects == expected_projects
 

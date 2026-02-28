@@ -51,18 +51,11 @@ class CoreSettings:
         source_root = settings_item.get("source_root") or self.project_root
         object.__setattr__(self, "source_root", str(Path(source_root).resolve()))
 
-    def _set_projects(self, projects_item: Any) -> None:
+    def _set_projects(self, projects_item: dict[str, Any]) -> None:
         if not isinstance(projects_item, dict):
             raise ValueError("projects does not contain a dict")
 
-        projects = {
-            name: CoreProject(
-                words=project.get("words", []),
-                acronyms=project.get("acronyms", []),
-                acronym_scheme=self.acronym_scheme,
-            )
-            for name, project in projects_item.items()
-        }
+        projects = {name: CoreProject(project) for name, project in projects_item.items()}
         object.__setattr__(self, "projects", projects)
 
 
