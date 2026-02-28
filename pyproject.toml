@@ -1,6 +1,6 @@
 [project]
 name = "glotter2-core"
-version = "0.1.1"
+version = "0.1.2"
 description = "A simple, lightweight core library glotter2"
 readme = "README.md"
 authors = [

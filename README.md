@@ -23,8 +23,9 @@ If you'd like to contribute to Glotter2-Core, read our [contributing guidelines]
 
 ### Glotter2-Core releases
 
+* 0.1.2:
+  * Add project dictionary to `CoreProject` class
 * 0.1.1:
   * Convert `untestable.yml` to the equivalent `testinfo.yml`
-
 * 0.1.0:
   * Initial release

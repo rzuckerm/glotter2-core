@@ -4,6 +4,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass, field
 from enum import Enum
+from typing import Any
 
 
 class NamingScheme(Enum):
@@ -140,29 +141,32 @@ class CoreProject(CoreProjectMixin):
     Project information. This class uses :class:`CoreProjectMixin` to implement
     its functionality
 
-    :param words: Project words
-    :param acronyms: Optional project acronyms. Default is no acronyms
-    :param str | AcronymScheme acronym_scheme: Optional project acronym scheme.
-        Default is :const:`AcroymScheme.two_letter_limit`
+    :param project_dict: Project dictionary
     :raises: :exc:`ValueError` if invalid acronym scheme
 
+    :ivar project_dict: Project dictionary
     :ivar words: Project words
     :ivar acronyms: Optional project acronyms. Default is no acronyms
-    :ivar AcronymScheme acronym_scheme: Optional project acronym scheme. Default is
+    :ivar acronym_scheme: Optional project acronym scheme. Default is
         :const:`AcroymScheme.two_letter_limit`
     """
 
     words: list[str]
-    acronyms: list[str] = field(default_factory=list)
-    acronym_scheme: str | AcronymScheme = AcronymScheme.two_letter_limit
+    acronyms: list[str]
+    acronym_scheme: AcronymScheme
+    project_dict: dict[str, Any] = field(repr=False)
 
-    def __post_init__(self):
-        object.__setattr__(self, "acronyms", [acronym.upper() for acronym in self.acronyms])
-        if not isinstance(self.acronym_scheme, AcronymScheme):
-            try:
-                object.__setattr__(self, "acronym_scheme", AcronymScheme[self.acronym_scheme])
-            except KeyError as e:
-                raise ValueError(f'Unknown acronym scheme: "{self.acronym_scheme}"') from e
+    def __init__(self, project_dict: dict[str, Any]):
+        object.__setattr__(self, "project_dict", project_dict)
+        object.__setattr__(self, "words", project_dict["words"])
+        object.__setattr__(
+            self, "acronyms", [acronym.upper() for acronym in project_dict.get("acronyms", [])]
+        )
+        acronym_scheme = project_dict.get("acronym_scheme", "two_letter_limit")
+        try:
+            object.__setattr__(self, "acronym_scheme", AcronymScheme[acronym_scheme])
+        except KeyError as e:
+            raise ValueError(f'Unknown acronym scheme: "{acronym_scheme}"') from e
 
 
 __all__ = ["AcronymScheme", "CoreProject", "CoreProjectMixin", "NamingScheme"]

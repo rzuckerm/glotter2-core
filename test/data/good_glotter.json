@@ -6,19 +6,20 @@
     "projects": {
         "baklava": {
             "words": ["baklava"],
-            "acronyms": []
+            "requires_parameters": false
         },
         "fileio": {
             "words": ["file", "io"],
-            "acronyms": ["io"]
+            "acronyms": ["io"],
+            "requires_parameters": false
         },
         "fibonacci": {
             "words": ["fibonacci"],
-            "acronyms": []
+            "requires_parameters": true
         },
         "helloworld": {
             "words": ["hello", "world"],
-            "acronyms": []
+            "requires_parameters": false
         }
     }
 }

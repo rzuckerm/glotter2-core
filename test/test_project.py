@@ -11,13 +11,13 @@ project_scheme_permutation_map = [
             (NamingScheme.hyphen, None): "word",
             (NamingScheme.underscore, None): "word",
             (NamingScheme.camel, None): "word",
-            (NamingScheme.camel, AcronymScheme.upper): "word",
-            (NamingScheme.camel, AcronymScheme.lower): "word",
-            (NamingScheme.camel, AcronymScheme.two_letter_limit): "word",
+            (NamingScheme.camel, "upper"): "word",
+            (NamingScheme.camel, "lower"): "word",
+            (NamingScheme.camel, "two_letter_limit"): "word",
             (NamingScheme.pascal, None): "Word",
-            (NamingScheme.pascal, AcronymScheme.upper): "Word",
-            (NamingScheme.pascal, AcronymScheme.lower): "Word",
-            (NamingScheme.pascal, AcronymScheme.two_letter_limit): "Word",
+            (NamingScheme.pascal, "upper"): "Word",
+            (NamingScheme.pascal, "lower"): "Word",
+            (NamingScheme.pascal, "two_letter_limit"): "Word",
             (NamingScheme.lower, None): "word",
         },
     },
@@ -29,13 +29,13 @@ project_scheme_permutation_map = [
             (NamingScheme.hyphen, None): "multiple-words",
             (NamingScheme.underscore, None): "multiple_words",
             (NamingScheme.camel, None): "multipleWords",
-            (NamingScheme.camel, AcronymScheme.upper): "multipleWords",
-            (NamingScheme.camel, AcronymScheme.lower): "multipleWords",
-            (NamingScheme.camel, AcronymScheme.two_letter_limit): "multipleWords",
+            (NamingScheme.camel, "upper"): "multipleWords",
+            (NamingScheme.camel, "lower"): "multipleWords",
+            (NamingScheme.camel, "two_letter_limit"): "multipleWords",
             (NamingScheme.pascal, None): "MultipleWords",
-            (NamingScheme.pascal, AcronymScheme.upper): "MultipleWords",
-            (NamingScheme.pascal, AcronymScheme.lower): "MultipleWords",
-            (NamingScheme.pascal, AcronymScheme.two_letter_limit): "MultipleWords",
+            (NamingScheme.pascal, "upper"): "MultipleWords",
+            (NamingScheme.pascal, "lower"): "MultipleWords",
+            (NamingScheme.pascal, "two_letter_limit"): "MultipleWords",
             (NamingScheme.lower, None): "multiplewords",
         },
     },
@@ -47,13 +47,13 @@ project_scheme_permutation_map = [
             (NamingScheme.hyphen, None): "io",
             (NamingScheme.underscore, None): "io",
             (NamingScheme.camel, None): "io",
-            (NamingScheme.camel, AcronymScheme.upper): "io",
-            (NamingScheme.camel, AcronymScheme.lower): "io",
-            (NamingScheme.camel, AcronymScheme.two_letter_limit): "io",
+            (NamingScheme.camel, "upper"): "io",
+            (NamingScheme.camel, "lower"): "io",
+            (NamingScheme.camel, "two_letter_limit"): "io",
             (NamingScheme.pascal, None): "IO",
-            (NamingScheme.pascal, AcronymScheme.upper): "IO",
-            (NamingScheme.pascal, AcronymScheme.lower): "io",
-            (NamingScheme.pascal, AcronymScheme.two_letter_limit): "IO",
+            (NamingScheme.pascal, "upper"): "IO",
+            (NamingScheme.pascal, "lower"): "io",
+            (NamingScheme.pascal, "two_letter_limit"): "IO",
             (NamingScheme.lower, None): "io",
         },
     },
@@ -65,13 +65,13 @@ project_scheme_permutation_map = [
             (NamingScheme.hyphen, None): "io-word",
             (NamingScheme.underscore, None): "io_word",
             (NamingScheme.camel, None): "ioWord",
-            (NamingScheme.camel, AcronymScheme.upper): "ioWord",
-            (NamingScheme.camel, AcronymScheme.lower): "ioWord",
-            (NamingScheme.camel, AcronymScheme.two_letter_limit): "ioWord",
+            (NamingScheme.camel, "upper"): "ioWord",
+            (NamingScheme.camel, "lower"): "ioWord",
+            (NamingScheme.camel, "two_letter_limit"): "ioWord",
             (NamingScheme.pascal, None): "IOWord",
-            (NamingScheme.pascal, AcronymScheme.upper): "IOWord",
-            (NamingScheme.pascal, AcronymScheme.lower): "ioWord",
-            (NamingScheme.pascal, AcronymScheme.two_letter_limit): "IOWord",
+            (NamingScheme.pascal, "upper"): "IOWord",
+            (NamingScheme.pascal, "lower"): "ioWord",
+            (NamingScheme.pascal, "two_letter_limit"): "IOWord",
             (NamingScheme.lower, None): "ioword",
         },
     },
@@ -83,13 +83,13 @@ project_scheme_permutation_map = [
             (NamingScheme.hyphen, None): "words-io-multiple",
             (NamingScheme.underscore, None): "words_io_multiple",
             (NamingScheme.camel, None): "wordsIOMultiple",
-            (NamingScheme.camel, AcronymScheme.upper): "wordsIOMultiple",
-            (NamingScheme.camel, AcronymScheme.lower): "wordsioMultiple",
-            (NamingScheme.camel, AcronymScheme.two_letter_limit): "wordsIOMultiple",
+            (NamingScheme.camel, "upper"): "wordsIOMultiple",
+            (NamingScheme.camel, "lower"): "wordsioMultiple",
+            (NamingScheme.camel, "two_letter_limit"): "wordsIOMultiple",
             (NamingScheme.pascal, None): "WordsIOMultiple",
-            (NamingScheme.pascal, AcronymScheme.upper): "WordsIOMultiple",
-            (NamingScheme.pascal, AcronymScheme.lower): "WordsioMultiple",
-            (NamingScheme.pascal, AcronymScheme.two_letter_limit): "WordsIOMultiple",
+            (NamingScheme.pascal, "upper"): "WordsIOMultiple",
+            (NamingScheme.pascal, "lower"): "WordsioMultiple",
+            (NamingScheme.pascal, "two_letter_limit"): "WordsIOMultiple",
             (NamingScheme.lower, None): "wordsiomultiple",
         },
     },
@@ -101,13 +101,13 @@ project_scheme_permutation_map = [
             (NamingScheme.hyphen, None): "multiple-words-io",
             (NamingScheme.underscore, None): "multiple_words_io",
             (NamingScheme.camel, None): "multipleWordsIO",
-            (NamingScheme.camel, AcronymScheme.upper): "multipleWordsIO",
-            (NamingScheme.camel, AcronymScheme.lower): "multipleWordsio",
-            (NamingScheme.camel, AcronymScheme.two_letter_limit): "multipleWordsIO",
+            (NamingScheme.camel, "upper"): "multipleWordsIO",
+            (NamingScheme.camel, "lower"): "multipleWordsio",
+            (NamingScheme.camel, "two_letter_limit"): "multipleWordsIO",
             (NamingScheme.pascal, None): "MultipleWordsIO",
-            (NamingScheme.pascal, AcronymScheme.upper): "MultipleWordsIO",
-            (NamingScheme.pascal, AcronymScheme.lower): "MultipleWordsio",
-            (NamingScheme.pascal, AcronymScheme.two_letter_limit): "MultipleWordsIO",
+            (NamingScheme.pascal, "upper"): "MultipleWordsIO",
+            (NamingScheme.pascal, "lower"): "MultipleWordsio",
+            (NamingScheme.pascal, "two_letter_limit"): "MultipleWordsIO",
             (NamingScheme.lower, None): "multiplewordsio",
         },
     },
@@ -119,13 +119,13 @@ project_scheme_permutation_map = [
             (NamingScheme.hyphen, None): "io-word-io",
             (NamingScheme.underscore, None): "io_word_io",
             (NamingScheme.camel, None): "ioWordIO",
-            (NamingScheme.camel, AcronymScheme.upper): "ioWordIO",
-            (NamingScheme.camel, AcronymScheme.lower): "ioWordio",
-            (NamingScheme.camel, AcronymScheme.two_letter_limit): "ioWordIO",
+            (NamingScheme.camel, "upper"): "ioWordIO",
+            (NamingScheme.camel, "lower"): "ioWordio",
+            (NamingScheme.camel, "two_letter_limit"): "ioWordIO",
             (NamingScheme.pascal, None): "IOWordIO",
-            (NamingScheme.pascal, AcronymScheme.upper): "IOWordIO",
-            (NamingScheme.pascal, AcronymScheme.lower): "ioWordio",
-            (NamingScheme.pascal, AcronymScheme.two_letter_limit): "IOWordIO",
+            (NamingScheme.pascal, "upper"): "IOWordIO",
+            (NamingScheme.pascal, "lower"): "ioWordio",
+            (NamingScheme.pascal, "two_letter_limit"): "IOWordIO",
             (NamingScheme.lower, None): "iowordio",
         },
     },
@@ -137,13 +137,13 @@ project_scheme_permutation_map = [
             (NamingScheme.hyphen, None): "io-word-ui",
             (NamingScheme.underscore, None): "io_word_ui",
             (NamingScheme.camel, None): "ioWordUI",
-            (NamingScheme.camel, AcronymScheme.upper): "ioWordUI",
-            (NamingScheme.camel, AcronymScheme.lower): "ioWordui",
-            (NamingScheme.camel, AcronymScheme.two_letter_limit): "ioWordUI",
+            (NamingScheme.camel, "upper"): "ioWordUI",
+            (NamingScheme.camel, "lower"): "ioWordui",
+            (NamingScheme.camel, "two_letter_limit"): "ioWordUI",
             (NamingScheme.pascal, None): "IOWordUI",
-            (NamingScheme.pascal, AcronymScheme.upper): "IOWordUI",
-            (NamingScheme.pascal, AcronymScheme.lower): "ioWordui",
-            (NamingScheme.pascal, AcronymScheme.two_letter_limit): "IOWordUI",
+            (NamingScheme.pascal, "upper"): "IOWordUI",
+            (NamingScheme.pascal, "lower"): "ioWordui",
+            (NamingScheme.pascal, "two_letter_limit"): "IOWordUI",
             (NamingScheme.lower, None): "iowordui",
         },
     },
@@ -155,13 +155,13 @@ project_scheme_permutation_map = [
             (NamingScheme.hyphen, None): "word-io-ui",
             (NamingScheme.underscore, None): "word_io_ui",
             (NamingScheme.camel, None): "wordIOUI",
-            (NamingScheme.camel, AcronymScheme.upper): "wordIOUI",
-            (NamingScheme.camel, AcronymScheme.lower): "wordioui",
-            (NamingScheme.camel, AcronymScheme.two_letter_limit): "wordIOUI",
+            (NamingScheme.camel, "upper"): "wordIOUI",
+            (NamingScheme.camel, "lower"): "wordioui",
+            (NamingScheme.camel, "two_letter_limit"): "wordIOUI",
             (NamingScheme.pascal, None): "WordIOUI",
-            (NamingScheme.pascal, AcronymScheme.upper): "WordIOUI",
-            (NamingScheme.pascal, AcronymScheme.lower): "Wordioui",
-            (NamingScheme.pascal, AcronymScheme.two_letter_limit): "WordIOUI",
+            (NamingScheme.pascal, "upper"): "WordIOUI",
+            (NamingScheme.pascal, "lower"): "Wordioui",
+            (NamingScheme.pascal, "two_letter_limit"): "WordIOUI",
             (NamingScheme.lower, None): "wordioui",
         },
     },
@@ -178,7 +178,7 @@ def get_project_scheme_permutations():
 
 
 def get_test_id(perm):
-    acronym_scheme = perm[4].value if perm[4] else "None"
+    acronym_scheme = perm[4] if perm[4] else "None"
     return "-".join([perm[0], perm[3].value, acronym_scheme])
 
 
@@ -187,13 +187,13 @@ def get_test_id(perm):
     [pytest.param(member.value, member, id=member.value) for member in AcronymScheme],
 )
 def test_acronym_scheme(acronym_scheme, expected_acronym_scheme):
-    project = CoreProject(words=["whatever"], acronym_scheme=acronym_scheme)
+    project = CoreProject({"words": ["whatever"], "acronym_scheme": acronym_scheme})
     assert project.acronym_scheme == expected_acronym_scheme
 
 
 def test_acronym_scheme_bad():
     with pytest.raises(ValueError):
-        CoreProject(words=["whatever"], acronym_scheme="bad")
+        CoreProject({"words": ["whatever"], "acronym_scheme": "bad"})
 
 
 @pytest.mark.parametrize(
@@ -209,7 +209,7 @@ def test_get_project_name_by_scheme(words, acronyms, naming_scheme, acronym_sche
     if acronyms is not None:
         value["acronyms"] = acronyms
 
-    project = CoreProject(**value)
+    project = CoreProject(value)
     actual = project.get_project_name_by_scheme(naming_scheme)
     assert actual == expected
 
@@ -225,12 +225,12 @@ def test_get_project_name_by_scheme(words, acronyms, naming_scheme, acronym_sche
     ],
 )
 def test_get_project_name_by_scheme_str(naming_scheme, expected):
-    project = CoreProject(words=["hello", "world"])
+    project = CoreProject({"words": ["hello", "world"]})
     assert project.get_project_name_by_scheme(naming_scheme) == expected
 
 
 def test_get_project_name_by_scheme_bad():
-    project = CoreProject(words=["blah"])
+    project = CoreProject({"words": ["blah"]})
     with pytest.raises(ValueError):
         project.get_project_name_by_scheme("junk")
 
@@ -243,7 +243,7 @@ def test_get_project_name_by_scheme_bad():
             {
                 "words": ["file", "io", "stuff"],
                 "acronyms": ["io", "stuff"],
-                "acronym_scheme": AcronymScheme.upper,
+                "acronym_scheme": "upper",
             },
             "File IO STUFF",
             id="acronym-upper",
@@ -252,7 +252,7 @@ def test_get_project_name_by_scheme_bad():
             {
                 "words": ["file", "io", "stuff"],
                 "acronyms": ["io", "stuff"],
-                "acronym_scheme": AcronymScheme.lower,
+                "acronym_scheme": "lower",
             },
             "File io stuff",
             id="acronym-lower",
@@ -265,5 +265,5 @@ def test_get_project_name_by_scheme_bad():
     ],
 )
 def test_get_display_name(value, expected_display_name):
-    project = CoreProject(**value)
+    project = CoreProject(value)
     assert project.display_name == expected_display_name
