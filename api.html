@@ -174,26 +174,22 @@ and all words are joined together (e.g., <code class="docutils literal notransla
 <h3>Classes<a class="headerlink" href="#classes" title="Link to this heading"></a></h3>
 <dl class="py class">
 <dt class="sig sig-object py" id="glotter_core.project.CoreProject">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">glotter_core.project.</span></span><span class="sig-name descname"><span class="pre">CoreProject</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">words:</span> <span class="pre">list[str],</span> <span class="pre">acronyms:</span> <span class="pre">list[str]</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;,</span> <span class="pre">acronym_scheme:</span> <span class="pre">str</span> <span class="pre">|</span> <span class="pre">AcronymScheme</span> <span class="pre">=</span> <span class="pre">AcronymScheme.two_letter_limit</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/glotter_core/project.html#CoreProject"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#glotter_core.project.CoreProject" title="Link to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">glotter_core.project.</span></span><span class="sig-name descname"><span class="pre">CoreProject</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">project_dict</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/glotter_core/project.html#CoreProject"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#glotter_core.project.CoreProject" title="Link to this definition"></a></dt>
 <dd><p>Project information. This class uses <a class="reference internal" href="#glotter_core.project.CoreProjectMixin" title="glotter_core.project.CoreProjectMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">CoreProjectMixin</span></code></a> to implement
 its functionality</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>words</strong> – Project words</p></li>
-<li><p><strong>acronyms</strong> – Optional project acronyms. Default is no acronyms</p></li>
-<li><p><strong>acronym_scheme</strong> (<em>str</em><em> | </em><a class="reference internal" href="#glotter_core.project.AcronymScheme" title="glotter_core.project.AcronymScheme"><em>AcronymScheme</em></a>) – Optional project acronym scheme.
-Default is <code class="xref py py-const docutils literal notranslate"><span class="pre">AcroymScheme.two_letter_limit</span></code></p></li>
-</ul>
+<dd class="field-odd"><p><strong>project_dict</strong> – Project dictionary</p>
 </dd>
 <dt class="field-even">Raises<span class="colon">:</span></dt>
 <dd class="field-even"><p><code class="xref py py-exc docutils literal notranslate"><span class="pre">ValueError</span></code> if invalid acronym scheme</p>
 </dd>
 <dt class="field-odd">Variables<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
+<li><p><strong>project_dict</strong> – Project dictionary</p></li>
 <li><p><strong>words</strong> – Project words</p></li>
 <li><p><strong>acronyms</strong> – Optional project acronyms. Default is no acronyms</p></li>
-<li><p><strong>acronym_scheme</strong> (<a class="reference internal" href="#glotter_core.project.AcronymScheme" title="glotter_core.project.AcronymScheme"><em>AcronymScheme</em></a>) – Optional project acronym scheme. Default is
+<li><p><strong>acronym_scheme</strong> – Optional project acronym scheme. Default is
 <code class="xref py py-const docutils literal notranslate"><span class="pre">AcroymScheme.two_letter_limit</span></code></p></li>
 </ul>
 </dd>
