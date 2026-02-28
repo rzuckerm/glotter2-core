@@ -25,6 +25,10 @@ If you'd like to contribute to Glotter2-Core, read our [contributing guidelines]
 
 * 0.1.2:
   * Add project dictionary to `CoreProject` class
+  * Add `CoreLanguage` class
+  * Remove `testinfo` field from `CoreSourceCategories` class
+  * Modify `by_language` field in `CoreSourceCategories` class
+    to be `dict[str, CoreLanguage]`
 * 0.1.1:
   * Convert `untestable.yml` to the equivalent `testinfo.yml`
 * 0.1.0:
