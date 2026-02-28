@@ -50,22 +50,34 @@ class CoreSource:
 
 
 @dataclass
+class CoreLanguage:
+    """
+    Information about a language
+
+    :ivar sources: list of source objects
+    :ivar test_info: TestInfo object
+    :ivar path: Path to TestInfo object file
+    """
+
+    sources: list[CoreSource]
+    test_info: TestInfo
+    test_info_path: Path
+
+
+@dataclass
 class CoreSourceCategories:
     """
     Categories for sources
 
     :ivar testable_by_project: dictionary whose key is the project type and
-        whose value is a testable source object
+        whose value is a list of testable source object
     :ivar by_language: dictionary whose key is the language and whose
-        value is a source object
-    :ivar test_info: dictionary whose key is the language name and whose value
-        is a TestInfo object
+        value is a CoreLanguage object
     :ivar bad_sources: list of filenames that do not belong to a project
     """
 
-    testable_by_project: dict[str, CoreSource] = field(default_factory=dict)
-    by_language: dict[str, CoreSource] = field(default_factory=dict)
-    test_info: dict[str, TestInfo] = field(default_factory=dict)
+    testable_by_project: dict[str, list[CoreSource]] = field(default_factory=dict)
+    by_language: dict[str, list[CoreLanguage]] = field(default_factory=dict)
     bad_sources: list[str] = field(default_factory=list)
 
 
@@ -92,25 +104,31 @@ def categorize_sources(
     for root, _, files in os.walk(path):
         current_path = Path(root).resolve()
         test_info_string = ""
+        test_info_filename = ""
         if "testinfo.yml" in files:
-            test_info_string = Path(current_path, "testinfo.yml").read_text(encoding="utf-8")
+            test_info_filename = "testinfo.yml"
+            test_info_string = Path(current_path, test_info_filename).read_text(encoding="utf-8")
         elif "untestable.yml" in files:
+            test_info_filename = "untestable.yml"
             test_info_string = _convert_untestable_to_testinfo(current_path, files, projects)
 
         if test_info_string:
             language = current_path.name
             test_info = TestInfo.from_dict(yaml.safe_load(test_info_string), language)
-            categories.test_info[language] = test_info
             folder_info = test_info.file_info
             folder_project_names = folder_info.get_project_mappings(
                 projects, include_extension=True
             )
+            sources = []
+            test_info_path = Path(current_path, test_info_filename)
             for project_type, project_name in folder_project_names.items():
                 if project_name in files:
                     source = source_cls(project_name, language, str(current_path), test_info_string)
-                    categories.by_language.setdefault(language, []).append(source)
+                    sources.append(source)
                     if source.test_info.is_testable:
                         categories.testable_by_project[project_type].append(source)
+
+            categories.by_language[language] = CoreLanguage(sources, test_info, test_info_path)
 
             invalid_filenames = set(files) - (
                 set(folder_project_names.values()) | _IGNORED_FILENAMES
@@ -155,4 +173,4 @@ def _convert_untestable_to_testinfo(
     return ""
 
 
-__all__ = ["CoreSource", "CoreSourceCategories", "categorize_sources"]
+__all__ = ["CoreLanguage", "CoreSource", "CoreSourceCategories", "categorize_sources"]

@@ -7,7 +7,7 @@ import pytest
 import yaml
 
 from glotter_core.settings import CoreSettings
-from glotter_core.source import CoreSource, CoreSourceCategories, categorize_sources
+from glotter_core.source import CoreLanguage, CoreSource, CoreSourceCategories, categorize_sources
 from glotter_core.testinfo import ContainerInfo, FolderInfo, TestInfo
 
 EXTENSION_NO_BUILD = ".py"
@@ -139,12 +139,14 @@ def test_categorize_sources():
     untestable_languages = ["mathematica"]
     languages = testable_languages + untestable_languages
     test_info_strs = {}
+    test_info_paths = {}
+    test_infos = {}
     paths = {}
     for language in languages:
         paths[language] = Path(settings.source_root, language[0], language)
-        testinfo_path = paths[language] / "testinfo.yml"
-        test_info_strs[language] = testinfo_path.read_text(encoding="utf-8")
-        expected_categories.test_info[language] = TestInfo.from_dict(
+        test_info_paths[language] = paths[language] / "testinfo.yml"
+        test_info_strs[language] = test_info_paths[language].read_text(encoding="utf-8")
+        test_infos[language] = TestInfo.from_dict(
             yaml.safe_load(test_info_strs[language]), language
         )
 
@@ -181,7 +183,11 @@ def test_categorize_sources():
         },
     }
     expected_categories.by_language = {
-        language: [source for source in project_sources.values()]
+        language: CoreLanguage(
+            sources=[source for source in project_sources.values()],
+            test_info=test_infos[language],
+            test_info_path=test_info_paths[language],
+        )
         for language, project_sources in expected_sources.items()
     }
 
@@ -197,11 +203,10 @@ def test_categorize_sources():
         str(Path("m", "mathematica", "junk.nb")),
         str(Path("p", "python", "foo.py")),
     ]
-    _assert_categorized_sources_eq(categories.by_language, expected_categories.by_language)
+    _assert_categorized_languages_eq(categories.by_language, expected_categories.by_language)
     _assert_categorized_sources_eq(
         categories.testable_by_project, expected_categories.testable_by_project
     )
-    assert categories.test_info == expected_categories.test_info
     assert set(categories.bad_sources) == set(expected_categories.bad_sources)
 
 
@@ -220,14 +225,16 @@ def test_categorize_sources_untestable():
         "untestable-underscore": {"extension": ".uu", "naming": "underscore"},
     }
     test_info_strs = {}
+    test_info_paths = {}
+    test_infos = {}
     paths = {}
     for language, folder_info in untestable_info.items():
         paths[language] = Path(settings.source_root, language[0], language)
-        untestable_path = paths[language] / "untestable.yml"
-        untestable = yaml.safe_load(untestable_path.read_text(encoding="utf-8"))
+        test_info_paths[language] = paths[language] / "untestable.yml"
+        untestable = yaml.safe_load(test_info_paths[language].read_text(encoding="utf-8"))
         test_info_dict = {"folder": folder_info, "notes": [untestable[0]["reason"]]}
         test_info_strs[language] = yaml.safe_dump(test_info_dict)
-        expected_categories.test_info[language] = TestInfo.from_dict(test_info_dict, language)
+        test_infos[language] = TestInfo.from_dict(test_info_dict, language)
 
     expected_categories.testable_by_project = {
         project_type: [] for project_type in settings.projects
@@ -306,27 +313,41 @@ def test_categorize_sources_untestable():
         },
     }
     expected_categories.by_language = {
-        language: [source for source in project_sources.values()]
+        language: CoreLanguage(
+            sources=[source for source in project_sources.values()],
+            test_info=test_infos[language],
+            test_info_path=test_info_paths[language],
+        )
         for language, project_sources in expected_sources.items()
     }
-    _assert_categorized_sources_eq(categories.by_language, expected_categories.by_language)
+    _assert_categorized_languages_eq(categories.by_language, expected_categories.by_language)
     _assert_categorized_sources_eq(
         categories.testable_by_project, expected_categories.testable_by_project
     )
-    assert categories.test_info == expected_categories.test_info
     assert set(categories.bad_sources) == set(expected_categories.bad_sources)
+
+
+def _assert_categorized_languages_eq(
+    languages1: dict[str, CoreLanguage], languages2: dict[str, CoreLanguage]
+) -> None:
+    assert set(languages1) == set(languages2)
+    for language, language_info2 in languages2.items():
+        language_info1 = languages1[language]
+        _assert_sources_eq(language_info1.sources, language_info2.sources)
+        assert language_info1.test_info == language_info2.test_info
+        assert language_info1.test_info_path == language_info2.test_info_path
 
 
 def _assert_categorized_sources_eq(
     categorized_sources1: dict[str, list[CoreSource]],
     categorized_sources2: dict[str, list[CoreSource]],
-) -> bool:
+) -> None:
     assert set(categorized_sources1) == set(categorized_sources2)
     for key, sources in categorized_sources2.items():
         _assert_sources_eq(categorized_sources1[key], sources)
 
 
-def _assert_sources_eq(sources1: CoreSource, sources2: CoreSource) -> bool:
+def _assert_sources_eq(sources1: list[CoreSource], sources2: list[CoreSource]) -> None:
     sources1 = sorted(sources1, key=lambda x: x.filename)
     sources2 = sorted(sources2, key=lambda x: x.filename)
     assert sources1 == sources2
