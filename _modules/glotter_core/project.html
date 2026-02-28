@@ -133,9 +133,9 @@
 
 <span class="sd">    The parent class must contain the following instance variables:</span>
 
-<span class="sd">    - **words** - Project words</span>
-<span class="sd">    - **acronyms** - Project acronyms</span>
-<span class="sd">    - **acronym_scheme** - Acronym scheme</span>
+<span class="sd">    :ivar str words: Project words</span>
+<span class="sd">    :ivar list[str] acronyms: Project acronyms</span>
+<span class="sd">    :ivar AcronymScheme acronym_scheme: Acronym scheme</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
 <div class="viewcode-block" id="CoreProjectMixin.get_project_name_by_scheme">
@@ -230,11 +230,11 @@
 <span class="sd">    :param project_dict: Project dictionary</span>
 <span class="sd">    :raises: :exc:`ValueError` if invalid acronym scheme</span>
 
-<span class="sd">    :ivar project_dict: Project dictionary</span>
-<span class="sd">    :ivar words: Project words</span>
-<span class="sd">    :ivar acronyms: Optional project acronyms. Default is no acronyms</span>
-<span class="sd">    :ivar acronym_scheme: Optional project acronym scheme. Default is</span>
-<span class="sd">        :const:`AcroymScheme.two_letter_limit`</span>
+<span class="sd">    :ivar dict[str, Any] project_dict: Project dictionary</span>
+<span class="sd">    :ivar list[str] words: Project words</span>
+<span class="sd">    :ivar list[str] acronyms: Optional project acronyms. Default is no acronyms</span>
+<span class="sd">    :ivar AcronymScheme acronym_scheme: Optional project acronym scheme. Default is</span>
+<span class="sd">        :const:`AcronymScheme.two_letter_limit`</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">words</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>

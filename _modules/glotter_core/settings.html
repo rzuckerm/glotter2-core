@@ -93,10 +93,10 @@
 
 <span class="sd">    :raises: :exc:`ValueError` if invalid settings</span>
 
-<span class="sd">    :ivar project_root: Root directory of project</span>
-<span class="sd">    :ivar source_root: Root directory for source files</span>
-<span class="sd">    :ivar acronym_scheme: Optional project acronym scheme.</span>
-<span class="sd">        Default is :const:`AcroymScheme.two_letter_limit`</span>
+<span class="sd">    :ivar str project_root: Root directory of project</span>
+<span class="sd">    :ivar src source_root: Root directory for source files</span>
+<span class="sd">    :ivar AcronymScheme acronym_scheme: Optional project acronym scheme.</span>
+<span class="sd">        Default is :const:`AcronymScheme.two_letter_limit`</span>
 <span class="sd">    :ivar projects: Dictionary whose key is the project name and whose value</span>
 <span class="sd">        is the project information</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -143,9 +143,9 @@
 <span class="sd">    :param project_root: Root directory of project</span>
 <span class="sd">    :raises: :exc:`ValueError` if setting file does not contain a dictionary</span>
 
-<span class="sd">    :ivar project_root: Root directory of project</span>
-<span class="sd">    :ivar yml_path: Path to ``.glotter.yml`` file</span>
-<span class="sd">    :ivar yml: Contents of ``.glotter.yml`` file</span>
+<span class="sd">    :ivar str project_root: Root directory of project</span>
+<span class="sd">    :ivar str | None yml_path: Path to ``.glotter.yml`` file</span>
+<span class="sd">    :ivar dict[str, Any] yml: Contents of ``.glotter.yml`` file</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">project_root</span><span class="p">:</span> <span class="nb">str</span>
