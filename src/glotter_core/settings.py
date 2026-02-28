@@ -19,10 +19,10 @@ class CoreSettings:
 
     :raises: :exc:`ValueError` if invalid settings
 
-    :ivar project_root: Root directory of project
-    :ivar source_root: Root directory for source files
-    :ivar acronym_scheme: Optional project acronym scheme.
-        Default is :const:`AcroymScheme.two_letter_limit`
+    :ivar str project_root: Root directory of project
+    :ivar src source_root: Root directory for source files
+    :ivar AcronymScheme acronym_scheme: Optional project acronym scheme.
+        Default is :const:`AcronymScheme.two_letter_limit`
     :ivar projects: Dictionary whose key is the project name and whose value
         is the project information
     """
@@ -66,9 +66,9 @@ class CoreSettingsParser:
     :param project_root: Root directory of project
     :raises: :exc:`ValueError` if setting file does not contain a dictionary
 
-    :ivar project_root: Root directory of project
-    :ivar yml_path: Path to ``.glotter.yml`` file
-    :ivar yml: Contents of ``.glotter.yml`` file
+    :ivar str project_root: Root directory of project
+    :ivar str | None yml_path: Path to ``.glotter.yml`` file
+    :ivar dict[str, Any] yml: Contents of ``.glotter.yml`` file
     """
 
     project_root: str

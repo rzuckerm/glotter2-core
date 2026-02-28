@@ -108,6 +108,7 @@ class TestInfo:
     :ivar file_info: FolderInfo object
     :ivar language_display_name: string indicating the display name of the
         language
+    :ivar notes: a list of notes about the language
     """
 
     container_info: ContainerInfo

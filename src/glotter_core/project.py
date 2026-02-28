@@ -53,9 +53,9 @@ class CoreProjectMixin:
 
     The parent class must contain the following instance variables:
 
-    - **words** - Project words
-    - **acronyms** - Project acronyms
-    - **acronym_scheme** - Acronym scheme
+    :ivar str words: Project words
+    :ivar list[str] acronyms: Project acronyms
+    :ivar AcronymScheme acronym_scheme: Acronym scheme
     """
 
     def get_project_name_by_scheme(self, naming: str | NamingScheme) -> str:
@@ -144,11 +144,11 @@ class CoreProject(CoreProjectMixin):
     :param project_dict: Project dictionary
     :raises: :exc:`ValueError` if invalid acronym scheme
 
-    :ivar project_dict: Project dictionary
-    :ivar words: Project words
-    :ivar acronyms: Optional project acronyms. Default is no acronyms
-    :ivar acronym_scheme: Optional project acronym scheme. Default is
-        :const:`AcroymScheme.two_letter_limit`
+    :ivar dict[str, Any] project_dict: Project dictionary
+    :ivar list[str] words: Project words
+    :ivar list[str] acronyms: Optional project acronyms. Default is no acronyms
+    :ivar AcronymScheme acronym_scheme: Optional project acronym scheme. Default is
+        :const:`AcronymScheme.two_letter_limit`
     """
 
     words: list[str]
