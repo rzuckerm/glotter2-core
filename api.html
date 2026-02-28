@@ -77,6 +77,7 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#module-glotter_core.source">glotter_core.source</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#glotter_core.source.CoreLanguage"><code class="docutils literal notranslate"><span class="pre">CoreLanguage</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#glotter_core.source.CoreSource"><code class="docutils literal notranslate"><span class="pre">CoreSource</span></code></a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#glotter_core.source.CoreSource.extension"><code class="docutils literal notranslate"><span class="pre">CoreSource.extension</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#glotter_core.source.CoreSource.full_path"><code class="docutils literal notranslate"><span class="pre">CoreSource.full_path</span></code></a></li>
@@ -411,6 +412,21 @@ Then parse it as yaml</p>
 <span id="glotter-core-source"></span><h2>glotter_core.source<a class="headerlink" href="#module-glotter_core.source" title="Link to this heading"></a></h2>
 <p>Source information</p>
 <dl class="py class">
+<dt class="sig sig-object py" id="glotter_core.source.CoreLanguage">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">glotter_core.source.</span></span><span class="sig-name descname"><span class="pre">CoreLanguage</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sources</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#glotter_core.source.CoreSource" title="glotter_core.source.CoreSource"><span class="pre">CoreSource</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_info</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#glotter_core.testinfo.TestInfo" title="glotter_core.testinfo.TestInfo"><span class="pre">TestInfo</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_info_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/glotter_core/source.html#CoreLanguage"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#glotter_core.source.CoreLanguage" title="Link to this definition"></a></dt>
+<dd><p>Information about a language</p>
+<dl class="field-list simple">
+<dt class="field-odd">Variables<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sources</strong> – list of source objects</p></li>
+<li><p><strong>test_info</strong> – TestInfo object</p></li>
+<li><p><strong>path</strong> – Path to TestInfo object file</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
 <dt class="sig sig-object py" id="glotter_core.source.CoreSource">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">glotter_core.source.</span></span><span class="sig-name descname"><span class="pre">CoreSource</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">language</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_info</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/glotter_core/source.html#CoreSource"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#glotter_core.source.CoreSource" title="Link to this definition"></a></dt>
 <dd><p>Metadata about a source file</p>
@@ -454,17 +470,15 @@ Then parse it as yaml</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="glotter_core.source.CoreSourceCategories">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">glotter_core.source.</span></span><span class="sig-name descname"><span class="pre">CoreSourceCategories</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">testable_by_project:</span> <span class="pre">dict[str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">~glotter_core.source.CoreSource]</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">by_language:</span> <span class="pre">dict[str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">~glotter_core.source.CoreSource]</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_info:</span> <span class="pre">dict[str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">~glotter_core.testinfo.TestInfo]</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bad_sources:</span> <span class="pre">list[str]</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/glotter_core/source.html#CoreSourceCategories"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#glotter_core.source.CoreSourceCategories" title="Link to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">glotter_core.source.</span></span><span class="sig-name descname"><span class="pre">CoreSourceCategories</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">testable_by_project:</span> <span class="pre">dict[str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">list[~glotter_core.source.CoreSource]]</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">by_language:</span> <span class="pre">dict[str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">list[~glotter_core.source.CoreLanguage]]</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bad_sources:</span> <span class="pre">list[str]</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/glotter_core/source.html#CoreSourceCategories"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#glotter_core.source.CoreSourceCategories" title="Link to this definition"></a></dt>
 <dd><p>Categories for sources</p>
 <dl class="field-list simple">
 <dt class="field-odd">Variables<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>testable_by_project</strong> – dictionary whose key is the project type and
-whose value is a testable source object</p></li>
+whose value is a list of testable source object</p></li>
 <li><p><strong>by_language</strong> – dictionary whose key is the language and whose
-value is a source object</p></li>
-<li><p><strong>test_info</strong> – dictionary whose key is the language name and whose value
-is a TestInfo object</p></li>
+value is a CoreLanguage object</p></li>
 <li><p><strong>bad_sources</strong> – list of filenames that do not belong to a project</p></li>
 </ul>
 </dd>
