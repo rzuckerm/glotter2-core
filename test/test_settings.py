@@ -1,4 +1,5 @@
 import json
+import os
 import shutil
 from pathlib import Path
 from typing import Any
@@ -9,7 +10,7 @@ import yaml
 from glotter_core.project import AcronymScheme, CoreProject
 from glotter_core.settings import CoreSettings, CoreSettingsParser
 
-TEST_DATA_DIR = Path("test/data").absolute()
+TEST_DATA_DIR = Path(os.path.abspath("test/data"))
 
 
 def setup_settings_parser(tmp_dir: str, path: str, contents: str) -> CoreSettingsParser:

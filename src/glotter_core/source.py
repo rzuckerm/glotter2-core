@@ -103,9 +103,9 @@ def categorize_sources(
 
     categories = CoreSourceCategories()
     categories.testable_by_project = {k: [] for k in projects}
-    orig_path = Path(path).absolute()
+    orig_path = os.path.abspath(path)
     for root, _, files in os.walk(path):
-        current_path = Path(root).absolute()
+        current_path = Path(os.path.abspath(root))
         test_info_string = ""
         test_info_filename = ""
         if "testinfo.yml" in files:
