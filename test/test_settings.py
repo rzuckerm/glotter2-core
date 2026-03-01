@@ -9,7 +9,7 @@ import yaml
 from glotter_core.project import AcronymScheme, CoreProject
 from glotter_core.settings import CoreSettings, CoreSettingsParser
 
-TEST_DATA_DIR = Path("test/data").resolve()
+TEST_DATA_DIR = Path("test/data").absolute()
 
 
 def setup_settings_parser(tmp_dir: str, path: str, contents: str) -> CoreSettingsParser:
