@@ -18,13 +18,13 @@ class CoreSource:
     :param language: the language of the source
     :param path: path to the file excluding name
     :param str test_info: a string in yaml format containing testinfo for a directory
-    :param str project_type: name of project for this source
+    :param project_type: name of project for this source
 
     :ivar filename: filename including extension
     :ivar language: the language of the source
     :ivar path: path to the file excluding name
     :ivar TestInfo test_info: TestInfo object
-    :param str project_type: name of project for this source
+    :param project_type: name of project for this source
     """
 
     filename: str
