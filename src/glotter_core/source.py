@@ -18,17 +18,20 @@ class CoreSource:
     :param language: the language of the source
     :param path: path to the file excluding name
     :param str test_info: a string in yaml format containing testinfo for a directory
+    :param str project_type: name of project for this source
 
     :ivar filename: filename including extension
     :ivar language: the language of the source
     :ivar path: path to the file excluding name
     :ivar TestInfo test_info: TestInfo object
+    :param str project_type: name of project for this source
     """
 
     filename: str
     language: str
     path: str
     test_info: str = field(repr=False)
+    project_type: str
 
     def __post_init__(self) -> None:
         object.__setattr__(self, "test_info", TestInfo.from_string(self.test_info, self))
@@ -123,7 +126,13 @@ def categorize_sources(
             test_info_path = Path(current_path, test_info_filename)
             for project_type, project_name in folder_project_names.items():
                 if project_name in files:
-                    source = source_cls(project_name, language, str(current_path), test_info_string)
+                    source = source_cls(
+                        filename=project_name,
+                        language=language,
+                        path=str(current_path),
+                        test_info=test_info_string,
+                        project_type=project_type,
+                    )
                     sources.append(source)
                     if source.test_info.is_testable:
                         categories.testable_by_project[project_type].append(source)

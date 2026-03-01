@@ -83,6 +83,7 @@ def test_full_path():
         language="python",
         path=str(Path("this", "is", "a", "path")),
         test_info=TEST_INFO_STRING_NO_BUILD,
+        project_type="someproject",
     )
     expected = str(Path("this", "is", "a", "path", "name.py"))
     actual = src.full_path
@@ -99,6 +100,7 @@ def test_basename_and_extension(filename, expected_name, expected_extension):
         language="python",
         path=str(Path("this", "is", "a", "path")),
         test_info=TEST_INFO_STRING_NO_BUILD,
+        project_type="someproject",
     )
     assert src.name == expected_name
     assert src.extension == expected_extension
@@ -123,7 +125,11 @@ def test_test_info_matches_test_info_string(
     filename, language, test_info_string, expected_test_info
 ):
     src = CoreSource(
-        filename=filename, language=language, path="some-path", test_info=test_info_string
+        filename=filename,
+        language=language,
+        path="some-path",
+        test_info=test_info_string,
+        project_type="someproject",
     )
     assert src.test_info == expected_test_info
 
@@ -153,32 +159,36 @@ def test_categorize_sources():
     expected_sources = {
         "c-plus-plus": {
             "helloworld": CoreSource(
-                "hello-world.cpp",
-                "c-plus-plus",
-                str(paths["c-plus-plus"]),
-                test_info_strs["c-plus-plus"],
+                filename="hello-world.cpp",
+                language="c-plus-plus",
+                path=str(paths["c-plus-plus"]),
+                test_info=test_info_strs["c-plus-plus"],
+                project_type="helloworld",
             )
         },
         "mathematica": {
             "helloworld": CoreSource(
-                "hello-world.nb",
-                "mathematica",
-                str(paths["mathematica"]),
-                test_info_strs["mathematica"],
+                filename="hello-world.nb",
+                language="mathematica",
+                path=str(paths["mathematica"]),
+                test_info=test_info_strs["mathematica"],
+                project_type="helloworld",
             )
         },
         "python": {
             "helloworld": CoreSource(
-                "hello_world.py",
-                "python",
-                str(paths["python"]),
-                test_info_strs["python"],
+                filename="hello_world.py",
+                language="python",
+                path=str(paths["python"]),
+                test_info=test_info_strs["python"],
+                project_type="helloworld",
             ),
             "rot13": CoreSource(
-                "rot13.py",
-                "python",
-                str(paths["python"]),
-                test_info_strs["python"],
+                filename="rot13.py",
+                language="python",
+                path=str(paths["python"]),
+                test_info=test_info_strs["python"],
+                project_type="rot13",
             ),
         },
     }
@@ -243,72 +253,82 @@ def test_categorize_sources_untestable():
     expected_sources = {
         "untestable-camel": {
             "helloworld": CoreSource(
-                "helloWorld.uc",
-                "untestable-camel",
-                str(paths["untestable-camel"]),
-                test_info_strs["untestable-camel"],
+                filename="helloWorld.uc",
+                language="untestable-camel",
+                path=str(paths["untestable-camel"]),
+                test_info=test_info_strs["untestable-camel"],
+                project_type="helloworld",
             ),
             "rot13": CoreSource(
-                "rot13.uc",
-                "untestable-camel",
-                str(paths["untestable-camel"]),
-                test_info_strs["untestable-camel"],
+                filename="rot13.uc",
+                language="untestable-camel",
+                path=str(paths["untestable-camel"]),
+                test_info=test_info_strs["untestable-camel"],
+                project_type="rot13",
             ),
         },
         "untestable-hyphen": {
             "helloworld": CoreSource(
-                "hello-world.uh",
-                "untestable-hyphen",
-                str(paths["untestable-hyphen"]),
-                test_info_strs["untestable-hyphen"],
+                filename="hello-world.uh",
+                language="untestable-hyphen",
+                path=str(paths["untestable-hyphen"]),
+                test_info=test_info_strs["untestable-hyphen"],
+                project_type="helloworld",
             ),
             "rot13": CoreSource(
-                "rot13.uh",
-                "untestable-hyphen",
-                str(paths["untestable-hyphen"]),
-                test_info_strs["untestable-hyphen"],
+                filename="rot13.uh",
+                language="untestable-hyphen",
+                path=str(paths["untestable-hyphen"]),
+                test_info=test_info_strs["untestable-hyphen"],
+                project_type="rot13",
             ),
         },
         "untestable-lower": {
             "helloworld": CoreSource(
-                "helloworld.ul",
-                "untestable-lower",
-                str(paths["untestable-lower"]),
-                test_info_strs["untestable-lower"],
+                filename="helloworld.ul",
+                language="untestable-lower",
+                path=str(paths["untestable-lower"]),
+                test_info=test_info_strs["untestable-lower"],
+                project_type="helloworld",
             ),
             "rot13": CoreSource(
-                "rot13.ul",
-                "untestable-lower",
-                str(paths["untestable-lower"]),
-                test_info_strs["untestable-lower"],
+                filename="rot13.ul",
+                language="untestable-lower",
+                path=str(paths["untestable-lower"]),
+                test_info=test_info_strs["untestable-lower"],
+                project_type="rot13",
             ),
         },
         "untestable-pascal": {
             "helloworld": CoreSource(
-                "HelloWorld.up",
-                "untestable-pascal",
-                str(paths["untestable-pascal"]),
-                test_info_strs["untestable-pascal"],
+                filename="HelloWorld.up",
+                language="untestable-pascal",
+                path=str(paths["untestable-pascal"]),
+                test_info=test_info_strs["untestable-pascal"],
+                project_type="helloworld",
             ),
             "rot13": CoreSource(
-                "Rot13.up",
-                "untestable-pascal",
-                str(paths["untestable-pascal"]),
-                test_info_strs["untestable-pascal"],
+                filename="Rot13.up",
+                language="untestable-pascal",
+                path=str(paths["untestable-pascal"]),
+                test_info=test_info_strs["untestable-pascal"],
+                project_type="rot13",
             ),
         },
         "untestable-underscore": {
             "helloworld": CoreSource(
-                "hello_world.uu",
-                "untestable-underscore",
-                str(paths["untestable-underscore"]),
-                test_info_strs["untestable-underscore"],
+                filename="hello_world.uu",
+                language="untestable-underscore",
+                path=str(paths["untestable-underscore"]),
+                test_info=test_info_strs["untestable-underscore"],
+                project_type="helloworld",
             ),
             "rot13": CoreSource(
-                "rot13.uu",
-                "untestable-underscore",
-                str(paths["untestable-underscore"]),
-                test_info_strs["untestable-underscore"],
+                filename="rot13.uu",
+                language="untestable-underscore",
+                path=str(paths["untestable-underscore"]),
+                test_info=test_info_strs["untestable-underscore"],
+                project_type="rot13",
             ),
         },
     }
