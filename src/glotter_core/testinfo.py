@@ -75,7 +75,7 @@ class FolderInfo:
         :param project: dictionary whose key is a project type and whose value is
             information about the project
         :param include_extension: whether to include the extension in the source name
-        :return: a dict where the key is a project name and the value is the source name
+        :return: a dict where the key is a project type and the value is the source name
         """
         extension = self.extension if include_extension else ""
         return {
